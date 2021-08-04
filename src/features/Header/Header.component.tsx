@@ -9,9 +9,9 @@ export const Header = () => {
   const { t } = useTranslation();
 
   return (
-    <Navbar bg='light' expand='lg'>
-      <Navbar.Toggle aria-controls='basic-navbar-nav' />
-      <Navbar.Collapse id='basic-navbar-nav'>
+    <Navbar bg='light' expand='lg' className="header__navbar">
+      <Navbar.Toggle aria-controls='navbar-nav' />
+      <Navbar.Collapse id='navbar-nav'>
         <Nav className='mr-auto'>
           <LinkContainer exact to='/'>
             <Nav.Link>{t("Dashboard")}</Nav.Link>

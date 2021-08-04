@@ -4,13 +4,16 @@ import { Col, Form } from "react-bootstrap";
 
 import { LANGUAGES } from "constants/language";
 import { SET_LANGUAGE } from "store/language/actionTypes";
+import { RESET_MOVIES } from "features/Dashboard/Dashboard.constants";
 
 export const LanguageSwitcher = () => {
   const activeLanguage = useAppSelector((state) => state.language.activeLanguage);
   const dispatch = useAppDispatch();
 
-  const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) =>
+  const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     dispatch({ type: SET_LANGUAGE, payload: event.target.value });
+    dispatch({ type: RESET_MOVIES });
+  };
 
   return (
     <Col xs='auto'>

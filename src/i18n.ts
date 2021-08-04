@@ -4,6 +4,8 @@ import { initReactI18next } from "react-i18next";
 import translationEn from "translations/en.json";
 import translationRu from "translations/ru.json";
 
+const { REACT_APP_LANGUAGE } = process.env;
+
 const resources = {
   en: {
     translation: translationEn,
@@ -15,7 +17,7 @@ const resources = {
 
 i18n.use(initReactI18next).init({
   resources,
-  lng: "en",
+  lng: REACT_APP_LANGUAGE,
   interpolation: {
     escapeValue: false,
   },

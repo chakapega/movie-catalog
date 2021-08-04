@@ -1,5 +1,8 @@
 {
   "Dashboard": "Dashboard",
   "Movies": "Movies",
-  "Random movie": "Random movie"
+  "Random movie": "Random movie",
+  "Now playing": "Now playing",
+  "Upcoming": "Upcoming",
+  "Popular": "Popular"
 }

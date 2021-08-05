@@ -8,7 +8,7 @@ export const MoviesList: React.FC<MoviesListProps> = ({ movies }) => (
   <ListGroup>
     {movies.map(({ id, title }) => (
       <ListGroup.Item key={id} action>
-        <LinkContainer exact to={`/movie/${id}`}>
+        <LinkContainer exact to={`/movie-details/${id}`}>
           <Nav.Link>{title}</Nav.Link>
         </LinkContainer>
       </ListGroup.Item>

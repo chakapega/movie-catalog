@@ -1,7 +1,9 @@
-export const ENGLISH = "en";
-export const RUSSIAN = "ru";
+enum language {
+  english = "en",
+  russian = "ru",
+}
 
-export const LANGUAGES = [ENGLISH, RUSSIAN];
+export const LANGUAGES = [language.english, language.russian];
 
 export const COUNTRY_CODES = {
   en: "en-US",

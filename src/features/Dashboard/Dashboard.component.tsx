@@ -18,27 +18,27 @@ export const Dashboard = () => {
     isLodaingPopularMovies,
     popularMovies,
   } = useAppSelector((state) => state.dashboard);
-  const getNowPlayingMoviesAvailable = !nowPlayingMovies.length && !isLoadingNowPlayingMovies;
-  const getUpcomingMoviesAvailable = !upcomingMovies.length && !isLoadingUpcomingMovies;
-  const getPopularMoviesAvailable = !popularMovies.length && !isLodaingPopularMovies;
+  const nowPlayingMoviesRequestAvailable = !nowPlayingMovies.length && !isLoadingNowPlayingMovies;
+  const upcomingMoviesRequestAvailable = !upcomingMovies.length && !isLoadingUpcomingMovies;
+  const popularMoviesRequestAvailable = !popularMovies.length && !isLodaingPopularMovies;
 
   useEffect(() => {
-    if (getNowPlayingMoviesAvailable) {
+    if (nowPlayingMoviesRequestAvailable) {
       dispatch(actions.getNowPlayingMovies(activeLanguage));
     }
-  }, [getNowPlayingMoviesAvailable, activeLanguage, dispatch]);
+  }, [nowPlayingMoviesRequestAvailable, activeLanguage, dispatch]);
 
   useEffect(() => {
-    if (getUpcomingMoviesAvailable) {
+    if (upcomingMoviesRequestAvailable) {
       dispatch(actions.getUpcomingMovies(activeLanguage));
     }
-  }, [getUpcomingMoviesAvailable, activeLanguage, dispatch]);
+  }, [upcomingMoviesRequestAvailable, activeLanguage, dispatch]);
 
   useEffect(() => {
-    if (getPopularMoviesAvailable) {
+    if (popularMoviesRequestAvailable) {
       dispatch(actions.getPopularMovies(activeLanguage));
     }
-  }, [getPopularMoviesAvailable, activeLanguage, dispatch]);
+  }, [popularMoviesRequestAvailable, activeLanguage, dispatch]);
 
   return (
     <Container>

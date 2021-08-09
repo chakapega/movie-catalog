@@ -13,3 +13,9 @@ export const GET_POPULAR_MOVIES_ERROR = "GET_POPULAR_MOVIES_ERROR";
 export const RESET_MOVIES = "RESET_MOVIES";
 
 export const NUMBER_OF_FILMS_IN_LIST = 5;
+
+export enum moviesType {
+  nowPlaying = "now_playing",
+  upcoming = "upcoming",
+  popular = "popular",
+}

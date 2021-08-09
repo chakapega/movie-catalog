@@ -6,7 +6,7 @@ import { useTranslation } from "react-i18next";
 import { EMPTY_MOVIE_DETAILS_VALUE } from "./MovieDetails.constants";
 import { useAppSelector } from "hooks";
 import { getMovieDetails } from "./MovieDetails.api";
-import { IMAGE_TMDB_BASE_URL } from "constants/api";
+import { getImageUrl } from "utils";
 
 export const MovieDetails = () => {
   const { id } = useParams<{ id: string }>();
@@ -27,7 +27,7 @@ export const MovieDetails = () => {
           <Container>
             <Row>
               <Col>
-                <img src={`${IMAGE_TMDB_BASE_URL}/${movieDetails.poster_path}`} alt='poster' />
+                <img src={getImageUrl(movieDetails.poster_path)} alt='poster' />
               </Col>
               <Col>
                 <p>{`${t("Release date")}: ${movieDetails.release_date}`}</p>

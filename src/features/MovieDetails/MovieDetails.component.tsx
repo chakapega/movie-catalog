@@ -1,26 +1,24 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useParams } from "react-router-dom";
 import { Container, Row, Col } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
+import { useQuery } from "react-query";
 
-import { EMPTY_MOVIE_DETAILS_VALUE } from "./MovieDetails.constants";
 import { useAppSelector } from "hooks";
 import { getMovieDetails } from "./MovieDetails.api";
 import { getImageUrl } from "utils";
 
 export const MovieDetails = () => {
+  const { t } = useTranslation();
   const { id } = useParams<{ id: string }>();
   const activeLanguage = useAppSelector((state) => state.language.activeLanguage);
-  const [movieDetails, setMovieDetails] = useState(EMPTY_MOVIE_DETAILS_VALUE);
-  const { t } = useTranslation();
-
-  useEffect(() => {
-    getMovieDetails(id, activeLanguage).then((movieDetails) => setMovieDetails(movieDetails));
-  }, [id, activeLanguage]);
+  const { isSuccess, data: movieDetails } = useQuery(["movieDetails", id, activeLanguage], () =>
+    getMovieDetails(id, activeLanguage)
+  );
 
   return (
     <>
-      {movieDetails && (
+      {isSuccess && (
         <Container>
           <h3>{movieDetails.title}</h3>
           <p>{movieDetails.overview}</p>
@@ -32,7 +30,7 @@ export const MovieDetails = () => {
               <Col>
                 <p>{`${t("Release date")}: ${movieDetails.release_date}`}</p>
                 <p>{`${t("Rating")}: ${movieDetails.vote_average}`}</p>
-                <p>{`${t("Tagline")}: ${movieDetails.tagline}`}</p>
+                {movieDetails.tagline && <p>{`${t("Tagline")}: ${movieDetails.tagline}`}</p>}
               </Col>
             </Row>
           </Container>

@@ -8,7 +8,18 @@ export const getMovieDetails = async (movieId: string, activeLanguage: LanguageT
   const countryCode = getCountryCode(activeLanguage);
 
   const response = await fetch(
-    `${THE_MOVIE_DB_BASE_URL}/${movieId}?api_key=${REACT_APP_THE_MOVIE_DB_KEY}&language=${countryCode}&page=1`
+    `${THE_MOVIE_DB_BASE_URL}/${movieId}?api_key=${REACT_APP_THE_MOVIE_DB_KEY}&language=${countryCode}`
+  );
+  const data = await response.json();
+
+  return data;
+};
+
+export const getMovieCredits = async (movieId: string, activeLanguage: LanguageType) => {
+  const countryCode = getCountryCode(activeLanguage);
+
+  const response = await fetch(
+    `${THE_MOVIE_DB_BASE_URL}/${movieId}/credits?api_key=${REACT_APP_THE_MOVIE_DB_KEY}&language=${countryCode}`
   );
   const data = await response.json();
 

@@ -9,7 +9,7 @@ export const getMovieInfo = async (infoType: string, movieId: string, activeLang
   const countryCode = getCountryCode(activeLanguage);
 
   const response = await fetch(
-    `${THE_MOVIE_DB_BASE_URL}/${movieId}${
+    `${THE_MOVIE_DB_BASE_URL}/movie/${movieId}${
       infoType === movieInfoType.details ? "" : "/" + infoType
     }?api_key=${REACT_APP_THE_MOVIE_DB_KEY}&language=${countryCode}`
   );

@@ -8,5 +8,8 @@
   "Release date": "Дата выпуска",
   "Rating": "Рейтинг",
   "Tagline": "Слоган",
-  "Starring": "В главных ролях"
+  "Starring": "В главных ролях",
+  "Genre": "Жанр",
+  "Apply": "Применить",
+  "paginationIndicator": "Страница {{page}} из {{totalPages}}"
 }

@@ -8,7 +8,7 @@ export const getMovies = async (moviesType: string, activeLanguage: LanguageType
   const countryCode = getCountryCode(activeLanguage);
 
   const response = await fetch(
-    `${THE_MOVIE_DB_BASE_URL}/${moviesType}?api_key=${REACT_APP_THE_MOVIE_DB_KEY}&language=${countryCode}&page=1`
+    `${THE_MOVIE_DB_BASE_URL}/movie/${moviesType}?api_key=${REACT_APP_THE_MOVIE_DB_KEY}&language=${countryCode}`
   );
   const { results } = await response.json();
 

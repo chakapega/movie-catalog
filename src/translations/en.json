@@ -8,5 +8,8 @@
   "Release date": "Release date",
   "Rating": "Rating",
   "Tagline": "Tagline",
-  "Starring": "Starring"
+  "Starring": "Starring",
+  "Genre": "Genre",
+  "Apply": "Apply",
+  "paginationIndicator": "Page {{page}} of {{totalPages}}"
 }

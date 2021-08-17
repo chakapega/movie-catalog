@@ -31,7 +31,7 @@ export const MovieDetails = () => {
   return (
     <>
       {areMovieDetailsSuccess && (
-        <Container className='movie-details__container'>
+        <Container className='movie-details-container'>
           <h3>{movieDetails.title}</h3>
           <p>{movieDetails.overview}</p>
           <Container>

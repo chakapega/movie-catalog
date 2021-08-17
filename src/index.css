@@ -16,6 +16,12 @@ code {
   margin-bottom: 30px;
 }
 
-.movie-details__container {
+.movie-details-container {
   margin-bottom: 20px;
+}
+
+.pagination-indicator {
+  display: flex;
+  align-items: center;
+  margin: 0 10px;
 }

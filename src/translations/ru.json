@@ -11,5 +11,8 @@
   "Starring": "В главных ролях",
   "Genre": "Жанр",
   "Apply": "Применить",
-  "paginationIndicator": "Страница {{page}} из {{totalPages}}"
+  "paginationIndicator": "Страница {{page}} из {{totalPages}}",
+  "All": "Все",
+  "Start release date": "Начальная дата релиза",
+  "End release date": "Конечная дата релиза"
 }

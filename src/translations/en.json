@@ -11,5 +11,8 @@
   "Starring": "Starring",
   "Genre": "Genre",
   "Apply": "Apply",
-  "paginationIndicator": "Page {{page}} of {{totalPages}}"
+  "paginationIndicator": "Page {{page}} of {{totalPages}}",
+  "All": "All",
+  "Start release date": "Start release date",
+  "End release date": "End release date"
 }

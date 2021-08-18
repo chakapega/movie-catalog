@@ -22,12 +22,14 @@ export const getMoviesByFilters = async (
   page: number
 ) => {
   const countryCode = getCountryCode(activeLanguage);
-  const { genreId } = selectedFilters!;
+  const { genreId, startDate, endDate } = selectedFilters!;
 
   const response = await fetch(
     `${THE_MOVIE_DB_BASE_URL}/discover/movie?${
       genreId ? "with_genres=" + genreId : ""
-    }&api_key=${REACT_APP_THE_MOVIE_DB_KEY}&language=${countryCode}&include_adult=false&page=${page}`
+    }&api_key=${REACT_APP_THE_MOVIE_DB_KEY}&language=${countryCode}&include_adult=false&page=${page}${
+      startDate ? `&primary_release_date.gte=` + startDate : ""
+    }${endDate ? `&primary_release_date.lte=` + endDate : ""}`
   );
   const data = await response.json();
 

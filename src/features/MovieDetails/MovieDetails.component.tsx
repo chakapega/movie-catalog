@@ -10,22 +10,24 @@ import { getImageUrl, limiteNumberOfActors, limiteNumberOfMovies } from "utils";
 import { CastList } from "./CastList";
 import { RecommendedMoviesList } from "./RecommendedMoviesList";
 import { movieInfoType } from "./MovieDetails.constants";
+import { MovieDetailsProps } from "./types";
 
-export const MovieDetails = () => {
+export const MovieDetails: React.FC<MovieDetailsProps> = ({ movieId }) => {
   const { t } = useTranslation();
   const { id } = useParams<{ id: string }>();
+  const resultMovieId = movieId || id;
   const activeLanguage = useAppSelector((state) => state.language.activeLanguage);
   const { isSuccess: areMovieDetailsSuccess, data: movieDetails } = useQuery(
-    [movieInfoType.details, id, activeLanguage],
-    () => getMovieInfo(movieInfoType.details, id, activeLanguage)
+    [movieInfoType.details, resultMovieId, activeLanguage],
+    () => getMovieInfo(movieInfoType.details, resultMovieId, activeLanguage)
   );
   const { isSuccess: areMovieCreditsSuccess, data: movieCredits } = useQuery(
-    [movieInfoType.credits, id, activeLanguage],
-    () => getMovieInfo(movieInfoType.credits, id, activeLanguage)
+    [movieInfoType.credits, resultMovieId, activeLanguage],
+    () => getMovieInfo(movieInfoType.credits, resultMovieId, activeLanguage)
   );
   const { isSuccess: areRecommendedMoviesSuccess, data: recommendedMovies } = useQuery(
-    [movieInfoType.recommendations, id, activeLanguage],
-    () => getMovieInfo(movieInfoType.recommendations, id, activeLanguage)
+    [movieInfoType.recommendations, resultMovieId, activeLanguage],
+    () => getMovieInfo(movieInfoType.recommendations, resultMovieId, activeLanguage)
   );
 
   return (

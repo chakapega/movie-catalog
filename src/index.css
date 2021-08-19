@@ -24,10 +24,8 @@ code {
   margin: 0 10px;
 }
 
-.date-pickers-container {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+.data-pickers-separator {
+  height: 15px;
 }
 
 .react-datepicker__input-container {

@@ -22,3 +22,9 @@ export const limiteNumberOfActors = (actors: ActorsType) =>
 export const getDateString = (date: Date) => {
   return moment(date).format(DATE_FORMAT);
 };
+
+export const getRandomMovieId = (movies: MoviesType) => {
+  const randomMovieIndex = Math.floor(Math.random() * movies.length);
+
+  return String(movies[randomMovieIndex].id);
+};

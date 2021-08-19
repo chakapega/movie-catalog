@@ -14,3 +14,7 @@ export type CastListProps = {
 export type RecommendedMoviesListProps = {
   recommendedMovies: MoviesType;
 };
+
+export type MovieDetailsProps = {
+  movieId?: string;
+};

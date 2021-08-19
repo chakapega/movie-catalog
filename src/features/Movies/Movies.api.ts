@@ -19,7 +19,7 @@ export const getGenres = async (activeLanguage: LanguageType) => {
 export const getMoviesByFilters = async (
   activeLanguage: LanguageType,
   selectedFilters: SelectedFiltersType,
-  page: number
+  page?: number
 ) => {
   const countryCode = getCountryCode(activeLanguage);
   const { genreId, startDate, endDate } = selectedFilters!;

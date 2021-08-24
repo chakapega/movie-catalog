@@ -14,5 +14,7 @@
   "paginationIndicator": "Page {{page}} of {{totalPages}}",
   "All": "All",
   "Start release date": "Start release date",
-  "End release date": "End release date"
+  "End release date": "End release date",
+  "Log In": "Log In",
+  "Log Out": "Log Out"
 }

@@ -14,5 +14,8 @@
   "paginationIndicator": "Страница {{page}} из {{totalPages}}",
   "All": "Все",
   "Start release date": "Начальная дата релиза",
-  "End release date": "Конечная дата релиза"
+  "End release date": "Конечная дата релиза",
+  "Log In": "Авторизоваться",
+  "Log Out": "Выйти"
+  
 }

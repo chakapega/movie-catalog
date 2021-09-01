@@ -9,7 +9,7 @@ import { AuthenticationButton } from "features/Auth/AuthenticationButton";
 
 export const Header = () => {
   const { t } = useTranslation();
-  const { user } = useAuth0();
+  const { user, isAuthenticated } = useAuth0();
 
   return (
     <Navbar bg='light' expand='lg' className='header__navbar'>
@@ -25,6 +25,11 @@ export const Header = () => {
           <LinkContainer to='/random-movie'>
             <Nav.Link>{t("Random movie")}</Nav.Link>
           </LinkContainer>
+          {isAuthenticated && (
+            <LinkContainer to='/movie-lists'>
+              <Nav.Link>{t("Movie lists")}</Nav.Link>
+            </LinkContainer>
+          )}
         </Nav>
         <LanguageSwitcher />
         <AuthenticationButton />

@@ -7,11 +7,7 @@ const { REACT_APP_AUTH0_DOMAIN, REACT_APP_AUTH0_CLIENT_ID } = process.env;
 export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const history = useHistory();
 
-  const onRedirectCallback = (appState: any) => {
-    console.log(appState);
-
-    history.push(appState?.returnTo || window.location.pathname);
-  };
+  const onRedirectCallback = (appState: any) => history.push(appState?.returnTo || window.location.pathname);
 
   return (
     <Auth0Provider

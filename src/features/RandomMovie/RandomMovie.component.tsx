@@ -30,9 +30,9 @@ export const RandomMovie = () => {
     if (selectedFilters) refetch();
   }, [refetch, selectedFilters, activeLanguage]);
 
-  const genreChangeHandler = (event: React.ChangeEvent<HTMLSelectElement>) => setGenreId(event.target.value);
+  const changeGenre = (event: React.ChangeEvent<HTMLSelectElement>) => setGenreId(event.target.value);
 
-  const submitHandler = () => {
+  const submit = () => {
     setSelectedFilters({
       genreId,
       startDate: startDate ? getDateString(startDate) : startDate,
@@ -45,8 +45,8 @@ export const RandomMovie = () => {
   return (
     <Container>
       <Filters
-        submitHandler={submitHandler}
-        genreChangeHandler={genreChangeHandler}
+        submit={submit}
+        changeGenre={changeGenre}
         setStartDate={setStartDate}
         setEndDate={setEndDate}
         genreId={genreId}

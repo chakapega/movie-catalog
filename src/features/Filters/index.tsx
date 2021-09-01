@@ -7,7 +7,7 @@ import englishLocale from "date-fns/locale/en-US";
 import russianLocale from "date-fns/locale/ru";
 import { useQuery } from "react-query";
 
-import { language } from "constants/language";
+import { Language } from "constants/language";
 import { FiltersProps } from "./types";
 import { GenreType } from "features/Movies/types";
 import { getGenres } from "features/Movies/Movies.api";
@@ -15,12 +15,12 @@ import { EMPTY_GENRES_VALUE } from "features/Movies/Movies.constants";
 
 import "react-datepicker/dist/react-datepicker.css";
 
-registerLocale(language.english, englishLocale);
-registerLocale(language.russian, russianLocale);
+registerLocale(Language.english, englishLocale);
+registerLocale(Language.russian, russianLocale);
 
 export const Filters: React.FC<FiltersProps> = ({
-  genreChangeHandler,
-  submitHandler,
+  changeGenre,
+  submit,
   setStartDate,
   setEndDate,
   genreId,
@@ -45,7 +45,7 @@ export const Filters: React.FC<FiltersProps> = ({
       {areGenresSuccess && (
         <Col xs='auto'>
           <p>{t("Genre")}</p>
-          <Form.Select size='sm' value={genreId} onChange={genreChangeHandler}>
+          <Form.Select size='sm' value={genreId} onChange={changeGenre}>
             <option value=''>{t("All")}</option>
             {genres.map(({ id, name }: GenreType) => (
               <option key={id} value={id}>
@@ -86,7 +86,7 @@ export const Filters: React.FC<FiltersProps> = ({
         />
       </Col>
       <Col>
-        <Button variant='primary' onClick={submitHandler} className='mt-3'>
+        <Button variant='primary' onClick={submit} className='mt-3'>
           {t("Apply")}
         </Button>
       </Col>

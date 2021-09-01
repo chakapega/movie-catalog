@@ -31,11 +31,11 @@ export const Movies = () => {
     if (selectedFilters) refetch();
   }, [refetch, selectedFilters, activeLanguage, page]);
 
-  const genreChangeHandler = (event: React.ChangeEvent<HTMLSelectElement>) => setGenreId(event.target.value);
+  const changeGenre = (event: React.ChangeEvent<HTMLSelectElement>) => setGenreId(event.target.value);
 
-  const changePageHandler = (selectedPage: number) => setPage(selectedPage);
+  const changePage = (selectedPage: number) => setPage(selectedPage);
 
-  const submitHandler = () => {
+  const submit = () => {
     setSelectedFilters({
       genreId,
       startDate: startDate ? getDateString(startDate) : startDate,
@@ -47,8 +47,8 @@ export const Movies = () => {
   return (
     <Container>
       <Filters
-        submitHandler={submitHandler}
-        genreChangeHandler={genreChangeHandler}
+        submit={submit}
+        changeGenre={changeGenre}
         setStartDate={setStartDate}
         setEndDate={setEndDate}
         genreId={genreId}
@@ -58,7 +58,7 @@ export const Movies = () => {
       {areMoviesSuccess && selectedFilters && (
         <>
           <MoviesList movies={searchedMoviesData.results} />
-          <Pagination page={page} totalPages={searchedMoviesData.total_pages} changePageHandler={changePageHandler} />
+          <Pagination page={page} totalPages={searchedMoviesData.total_pages} changePage={changePage} />
         </>
       )}
     </Container>

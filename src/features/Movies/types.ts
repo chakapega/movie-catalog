@@ -4,7 +4,7 @@ export type GenreType = {
 };
 
 export type SelectedFiltersType = {
-  genreId: string;
-  startDate: string | null;
-  endDate: string | null;
+  genreId?: string;
+  startDate?: string;
+  endDate?: string;
 } | null;

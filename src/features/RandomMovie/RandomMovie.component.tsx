@@ -3,7 +3,6 @@ import { Container } from "react-bootstrap";
 
 import { Filters } from "features/Filters";
 import { SelectedFiltersType } from "features/Movies/types";
-import { EMPTY_STRING } from "constants/common";
 import { getDateString, getRandomMovieId } from "utils";
 import { useQuery } from "react-query";
 import { getMoviesByFilters } from "features/Movies/Movies.api";
@@ -12,9 +11,9 @@ import { MovieDetails } from "features/MovieDetails/MovieDetails.component";
 
 export const RandomMovie = () => {
   const activeLanguage = useAppSelector((state) => state.language.activeLanguage);
-  const [startDate, setStartDate] = useState<any>(null);
-  const [endDate, setEndDate] = useState<any>(null);
-  const [genreId, setGenreId] = useState<string>(EMPTY_STRING);
+  const [startDate, setStartDate] = useState<any>();
+  const [endDate, setEndDate] = useState<any>();
+  const [genreId, setGenreId] = useState<string>();
   const [selectedFilters, setSelectedFilters] = useState<SelectedFiltersType>(null);
 
   const {

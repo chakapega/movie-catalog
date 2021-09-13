@@ -5,7 +5,7 @@ import { useQuery } from "react-query";
 
 import { SelectedFiltersType } from "./types";
 import { getMoviesByFilters } from "./Movies.api";
-import { EMPTY_STRING, PAGE_NUMBER_ONE } from "constants/common";
+import { PAGE_NUMBER_ONE } from "constants/common";
 import { Pagination } from "features/Pagination";
 import { MoviesList } from "features/Dashboard/MoviesList";
 import { getDateString } from "utils";
@@ -13,11 +13,11 @@ import { Filters } from "features/Filters";
 
 export const Movies = () => {
   const activeLanguage = useAppSelector((state) => state.language.activeLanguage);
-  const [genreId, setGenreId] = useState<string>(EMPTY_STRING);
+  const [genreId, setGenreId] = useState<string>();
   const [selectedFilters, setSelectedFilters] = useState<SelectedFiltersType>(null);
   const [page, setPage] = useState(PAGE_NUMBER_ONE);
-  const [startDate, setStartDate] = useState<any>(null);
-  const [endDate, setEndDate] = useState<any>(null);
+  const [startDate, setStartDate] = useState<any>();
+  const [endDate, setEndDate] = useState<any>();
   const {
     isSuccess: areMoviesSuccess,
     data: searchedMoviesData,

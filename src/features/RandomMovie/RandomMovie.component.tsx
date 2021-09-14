@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useMemo } from "react";
 import { Container } from "react-bootstrap";
 
 import { Filters } from "features/Filters";
@@ -31,14 +31,16 @@ export const RandomMovie = () => {
 
   useEffect(() => {
     if (selectedFilters) refetch();
-    console.log(selectedFilters);
   }, [refetch, selectedFilters, activeLanguage]);
 
   const submit = () => {
     changeSelectedFilters();
   };
 
-  const randomMovieId = areMoviesSuccess && getRandomMovieId(searchedMoviesData.results);
+  const randomMovieId = useMemo(
+    () => areMoviesSuccess && getRandomMovieId(searchedMoviesData.results),
+    [areMoviesSuccess, searchedMoviesData?.results]
+  );
 
   return (
     <Container>

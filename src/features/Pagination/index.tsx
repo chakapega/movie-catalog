@@ -1,7 +1,7 @@
 import React from "react";
 import BootstrapPagination from "react-bootstrap/Pagination";
 import { useTranslation } from "react-i18next";
-import { PAGE_NUMBER_ONE } from "constants/common";
+import { FIRST_PAGE } from "constants/common";
 
 import { PaginationProps } from "./types";
 
@@ -11,17 +11,17 @@ export const Pagination: React.FC<PaginationProps> = ({ page, totalPages, change
   return (
     <BootstrapPagination className='m-3'>
       <BootstrapPagination.First
-        disabled={page === PAGE_NUMBER_ONE}
-        onClick={() => changePage(PAGE_NUMBER_ONE)}
+        disabled={page === FIRST_PAGE}
+        onClick={() => changePage(FIRST_PAGE)}
       />
       <BootstrapPagination.Prev
-        disabled={page === PAGE_NUMBER_ONE}
-        onClick={() => changePage(page - PAGE_NUMBER_ONE)}
+        disabled={page === FIRST_PAGE}
+        onClick={() => changePage(page - FIRST_PAGE)}
       />
       <span className='pagination-indicator'>{t("paginationIndicator", { page, totalPages })}</span>
       <BootstrapPagination.Next
         disabled={page === totalPages}
-        onClick={() => changePage(page + PAGE_NUMBER_ONE)}
+        onClick={() => changePage(page + FIRST_PAGE)}
       />
       <BootstrapPagination.Last disabled={page === totalPages} onClick={() => changePage(totalPages)} />
     </BootstrapPagination>

@@ -1,59 +1,61 @@
 import React, { useEffect, useState } from "react";
-import { useAppSelector } from "hooks";
 import { Container } from "react-bootstrap";
 import { useQuery } from "react-query";
 
-import { SelectedFiltersType } from "./types";
+import { useAppSelector, useFilters } from "hooks/common";
 import { getMoviesByFilters } from "./Movies.api";
-import { PAGE_NUMBER_ONE } from "constants/common";
+import { FIRST_PAGE } from "constants/common";
 import { Pagination } from "features/Pagination";
 import { MoviesList } from "features/Dashboard/MoviesList";
-import { getDateString } from "utils";
 import { Filters } from "features/Filters";
 
 export const Movies = () => {
   const activeLanguage = useAppSelector((state) => state.language.activeLanguage);
-  const [genreId, setGenreId] = useState<string>();
-  const [selectedFilters, setSelectedFilters] = useState<SelectedFiltersType>(null);
-  const [page, setPage] = useState(PAGE_NUMBER_ONE);
-  const [startDate, setStartDate] = useState<any>();
-  const [endDate, setEndDate] = useState<any>();
+  const {
+    genreId,
+    changeGenre,
+    startDate,
+    changeStartDate,
+    endDate,
+    changeEndDate,
+    selectedFilters,
+    changeSelectedFilters,
+  } = useFilters();
+  const [page, setPage] = useState(FIRST_PAGE);
   const {
     isSuccess: areMoviesSuccess,
     data: searchedMoviesData,
     refetch,
-  } = useQuery(["getMoviesByFilters", activeLanguage, page], () => getMoviesByFilters(activeLanguage, selectedFilters, page), {
-    refetchOnWindowFocus: false,
-    enabled: false,
-  });
+  } = useQuery(
+    ["getMoviesByFilters", activeLanguage, page],
+    () => getMoviesByFilters(activeLanguage, selectedFilters, page),
+    {
+      refetchOnWindowFocus: false,
+      enabled: false,
+    }
+  );
 
   useEffect(() => {
     if (selectedFilters) refetch();
   }, [refetch, selectedFilters, activeLanguage, page]);
 
-  const changeGenre = (event: React.ChangeEvent<HTMLSelectElement>) => setGenreId(event.target.value);
-
   const changePage = (selectedPage: number) => setPage(selectedPage);
 
   const submit = () => {
-    setSelectedFilters({
-      genreId,
-      startDate: startDate ? getDateString(startDate) : startDate,
-      endDate: endDate ? getDateString(endDate) : endDate,
-    });
-    setPage(PAGE_NUMBER_ONE);
+    changeSelectedFilters();
+    setPage(FIRST_PAGE);
   };
 
   return (
     <Container>
       <Filters
         submit={submit}
-        changeGenre={changeGenre}
-        setStartDate={setStartDate}
-        setEndDate={setEndDate}
         genreId={genreId}
+        changeGenre={changeGenre}
         startDate={startDate}
+        changeStartDate={changeStartDate}
         endDate={endDate}
+        changeEndDate={changeEndDate}
       />
       {areMoviesSuccess && selectedFilters && (
         <>

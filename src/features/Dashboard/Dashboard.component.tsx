@@ -1,9 +1,9 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { useAppSelector } from "hooks";
 import { Container, Row, Col } from "react-bootstrap";
 import { useQuery } from "react-query";
 
+import { useAppSelector } from "hooks/common";
 import { movieType } from "./Dashboard.constants";
 import { getMovies } from "./Dashboard.api";
 import { MoviesList } from "./MoviesList";

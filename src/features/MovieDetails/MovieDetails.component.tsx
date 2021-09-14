@@ -4,7 +4,7 @@ import { Container, Row, Col } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
 import { useQuery } from "react-query";
 
-import { useAppSelector } from "hooks";
+import { useAppSelector } from "hooks/common";
 import { getMovieInfo } from "./MovieDetails.api";
 import { getImageUrl, limiteNumberOfActors, limiteNumberOfMovies } from "utils";
 import { CastList } from "./CastList";

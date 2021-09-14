@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-import { useAppSelector } from "hooks";
 import { Row, Col, Form, Button } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
 import DatePicker, { registerLocale, setDefaultLocale } from "react-datepicker";
@@ -7,6 +6,7 @@ import englishLocale from "date-fns/locale/en-US";
 import russianLocale from "date-fns/locale/ru";
 import { useQuery } from "react-query";
 
+import { useAppSelector } from "hooks/common";
 import { Language } from "constants/language";
 import { FiltersProps } from "./types";
 import { GenreType } from "features/Movies/types";
@@ -19,13 +19,13 @@ registerLocale(Language.english, englishLocale);
 registerLocale(Language.russian, russianLocale);
 
 export const Filters: React.FC<FiltersProps> = ({
-  changeGenre,
   submit,
-  setStartDate,
-  setEndDate,
   genreId,
+  changeGenre,
   startDate,
+  changeStartDate,
   endDate,
+  changeEndDate,
 }) => {
   const { t } = useTranslation();
   const activeLanguage = useAppSelector((state) => state.language.activeLanguage);
@@ -58,7 +58,7 @@ export const Filters: React.FC<FiltersProps> = ({
       <Col>
         <DatePicker
           selected={startDate}
-          onChange={(date) => setStartDate(date)}
+          onChange={(date) => changeStartDate(date)}
           startDate={startDate}
           endDate={endDate}
           isClearable={startDate}
@@ -72,7 +72,7 @@ export const Filters: React.FC<FiltersProps> = ({
         <div className='data-pickers-separator' />
         <DatePicker
           selected={endDate}
-          onChange={(date) => setEndDate(date)}
+          onChange={(date) => changeEndDate(date)}
           startDate={startDate}
           endDate={endDate}
           minDate={startDate}

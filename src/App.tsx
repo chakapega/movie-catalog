@@ -3,7 +3,7 @@ import { Switch, Route } from "react-router-dom";
 import i18next from "i18next";
 import { useAuth0 } from "@auth0/auth0-react";
 
-import { useAppSelector } from "hooks";
+import { useAppSelector } from "hooks/common";
 import { Header } from "features/Header/Header.component";
 import { Dashboard } from "features/Dashboard/Dashboard.component";
 import { Movies } from "features/Movies/Movies.component";

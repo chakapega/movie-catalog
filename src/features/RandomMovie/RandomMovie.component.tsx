@@ -1,21 +1,25 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { Container } from "react-bootstrap";
 
 import { Filters } from "features/Filters";
-import { SelectedFiltersType } from "features/Movies/types";
-import { getDateString, getRandomMovieId } from "utils";
+import { getRandomMovieId } from "utils";
 import { useQuery } from "react-query";
 import { getMoviesByFilters } from "features/Movies/Movies.api";
-import { useAppSelector } from "hooks";
+import { useAppSelector, useFilters } from "hooks/common";
 import { MovieDetails } from "features/MovieDetails/MovieDetails.component";
 
 export const RandomMovie = () => {
   const activeLanguage = useAppSelector((state) => state.language.activeLanguage);
-  const [startDate, setStartDate] = useState<any>();
-  const [endDate, setEndDate] = useState<any>();
-  const [genreId, setGenreId] = useState<string>();
-  const [selectedFilters, setSelectedFilters] = useState<SelectedFiltersType>(null);
-
+  const {
+    genreId,
+    changeGenre,
+    startDate,
+    changeStartDate,
+    endDate,
+    changeEndDate,
+    selectedFilters,
+    changeSelectedFilters,
+  } = useFilters();
   const {
     isSuccess: areMoviesSuccess,
     data: searchedMoviesData,
@@ -27,16 +31,11 @@ export const RandomMovie = () => {
 
   useEffect(() => {
     if (selectedFilters) refetch();
+    console.log(selectedFilters);
   }, [refetch, selectedFilters, activeLanguage]);
 
-  const changeGenre = (event: React.ChangeEvent<HTMLSelectElement>) => setGenreId(event.target.value);
-
   const submit = () => {
-    setSelectedFilters({
-      genreId,
-      startDate: startDate ? getDateString(startDate) : startDate,
-      endDate: endDate ? getDateString(endDate) : endDate,
-    });
+    changeSelectedFilters();
   };
 
   const randomMovieId = areMoviesSuccess && getRandomMovieId(searchedMoviesData.results);
@@ -45,12 +44,12 @@ export const RandomMovie = () => {
     <Container>
       <Filters
         submit={submit}
-        changeGenre={changeGenre}
-        setStartDate={setStartDate}
-        setEndDate={setEndDate}
         genreId={genreId}
+        changeGenre={changeGenre}
         startDate={startDate}
+        changeStartDate={changeStartDate}
         endDate={endDate}
+        changeEndDate={changeEndDate}
       />
       {selectedFilters && randomMovieId && <MovieDetails movieId={randomMovieId} />}
     </Container>

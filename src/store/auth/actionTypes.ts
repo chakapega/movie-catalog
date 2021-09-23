@@ -1,0 +1,2 @@
+export const SAVE_SESSION_ID = "SAVE_SESSION_ID";
+export const DELETE_SESSION_ID = "DELETE_SESSION_ID";

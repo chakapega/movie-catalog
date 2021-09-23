@@ -1,5 +1,5 @@
-import { CHANGE_LANGUAGE } from "./actionTypes";
 import type { LanguageStateType, LanguageActionType } from "./types";
+import { CHANGE_LANGUAGE } from "./actionTypes";
 
 const { REACT_APP_LANGUAGE } = process.env;
 

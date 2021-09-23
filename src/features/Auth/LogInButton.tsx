@@ -1,14 +1,22 @@
 import React from "react";
 import { Button } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
-import { useAuth0 } from "@auth0/auth0-react";
+
+import * as api from "./Auth.api";
 
 export const LogInButton = () => {
   const { t } = useTranslation();
-  const { loginWithRedirect } = useAuth0();
+
+  const logIn = () => {
+    api.createRequestToken().then((request_token) => {
+      window.location.replace(
+        `https://www.themoviedb.org/authenticate/${request_token}?redirect_to=http://localhost:3000/auth-page`
+      );
+    });
+  };
 
   return (
-    <Button className='m-3' onClick={() => loginWithRedirect()}>
+    <Button className='m-3' onClick={() => logIn()}>
       {t("Log In")}
     </Button>
   );

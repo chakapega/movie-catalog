@@ -1,11 +1,11 @@
 import React from "react";
-import { useAuth0 } from "@auth0/auth0-react";
 
+import { useAppSelector } from "hooks/common";
 import { LogOutButton } from "./LogOutButton";
 import { LogInButton } from "./LogInButton";
 
 export const AuthenticationButton = () => {
-  const { isAuthenticated } = useAuth0();
+  const session_id = useAppSelector((state) => state.auth.session_id);
 
-  return isAuthenticated ? <LogOutButton /> : <LogInButton />;
+  return session_id ? <LogOutButton /> : <LogInButton />;
 };

@@ -8,7 +8,6 @@ import reportWebVitals from "./reportWebVitals";
 import "./i18n";
 import App from "./App";
 import { store } from "store";
-import { AuthProvider } from "features/Auth/AuthProvider";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./index.css";
@@ -20,9 +19,7 @@ ReactDOM.render(
     <QueryClientProvider client={queryClient}>
       <Provider store={store}>
         <BrowserRouter>
-          <AuthProvider>
-            <App />
-          </AuthProvider>
+          <App />
         </BrowserRouter>
       </Provider>
     </QueryClientProvider>

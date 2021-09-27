@@ -1,12 +1,14 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
-import reportWebVitals from "./reportWebVitals";
 import { QueryClient, QueryClientProvider } from "react-query";
+import { BrowserRouter } from "react-router-dom";
 
+import reportWebVitals from "./reportWebVitals";
 import "./i18n";
 import App from "./App";
 import { store } from "store";
+import { AuthProvider } from "features/Auth/AuthProvider";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./index.css";
@@ -17,7 +19,11 @@ ReactDOM.render(
   <React.StrictMode>
     <QueryClientProvider client={queryClient}>
       <Provider store={store}>
-        <App />
+        <BrowserRouter>
+          <AuthProvider>
+            <App />
+          </AuthProvider>
+        </BrowserRouter>
       </Provider>
     </QueryClientProvider>
   </React.StrictMode>,

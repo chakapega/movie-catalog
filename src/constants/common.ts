@@ -1,2 +1,3 @@
 export const INDEX_OF_FIRST_ELEMENT = 0;
-export const EMPTY_MOVIES_VALUE = [];
+export const FIRST_PAGE = 1;
+export const DATE_FORMAT = "YYYY-MM-DD";

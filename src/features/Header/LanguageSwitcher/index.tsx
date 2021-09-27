@@ -1,7 +1,7 @@
 import React from "react";
-import { useAppSelector, useAppDispatch } from "hooks";
 import { Col, Form } from "react-bootstrap";
 
+import { useAppSelector, useAppDispatch } from "hooks/common";
 import { LANGUAGES } from "constants/language";
 import { CHANGE_LANGUAGE } from "store/language/actionTypes";
 

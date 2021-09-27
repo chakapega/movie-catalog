@@ -7,5 +7,16 @@
   "Popular": "Популярное",
   "Release date": "Дата выпуска",
   "Rating": "Рейтинг",
-  "Tagline": "Слоган"
+  "Tagline": "Слоган",
+  "Starring": "В главных ролях",
+  "Genre": "Жанр",
+  "Apply": "Применить",
+  "paginationIndicator": "Страница {{page}} из {{totalPages}}",
+  "All": "Все",
+  "Start release date": "Начальная дата релиза",
+  "End release date": "Конечная дата релиза",
+  "Log In": "Авторизоваться",
+  "Log Out": "Выйти",
+  "Movie Lists": "Списки фильмов"
+  
 }

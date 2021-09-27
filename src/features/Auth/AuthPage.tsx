@@ -16,10 +16,11 @@ export const AuthPage = () => {
   const history = useHistory();
   const { request_token, approved } = qs.parse(location.search, { ignoreQueryPrefix: true });
 
-  const createSession = async () => {
+  const finishAuthorization = async () => {
     const session_id = await api.createSession(request_token);
 
     dispatch({ type: SAVE_SESSION_ID, payload: session_id });
+    sessionStorage.setItem("session_id", session_id);
     history.push("/");
   };
 
@@ -27,7 +28,7 @@ export const AuthPage = () => {
     <>
       <span className='m-3'>{approved ? t("Permission approved") : t("Permission denied")}</span>
       {approved && (
-        <Button className='m-3' onClick={() => createSession()}>
+        <Button className='m-3' onClick={() => finishAuthorization()}>
           {t("Finish authorization")}
         </Button>
       )}

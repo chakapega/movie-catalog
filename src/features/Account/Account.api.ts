@@ -13,3 +13,12 @@ export const getDetails = async (session_id: SessionIdType) => {
 
   return accountDetails;
 };
+
+export const getCreatedLists = async (session_id: SessionIdType, account_id: number) => {
+  const query = qs.stringify({ api_key: REACT_APP_THE_MOVIE_DB_KEY, session_id });
+
+  const response = await fetch(`${THE_MOVIE_DB_BASE_URL}/account/${account_id}/lists?${query}`);
+  const { results } = await response.json();
+
+  return results;
+};

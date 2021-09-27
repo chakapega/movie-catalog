@@ -2,7 +2,7 @@ import type { AuthStateType, AuthActionType } from "./types";
 import { SAVE_SESSION_ID, DELETE_SESSION_ID } from "./actionTypes";
 
 const initialState: AuthStateType = {
-  session_id: null,
+  session_id: sessionStorage.getItem("session_id") || null,
 };
 
 const authReducer = (state = initialState, action: AuthActionType): AuthStateType => {
@@ -10,6 +10,8 @@ const authReducer = (state = initialState, action: AuthActionType): AuthStateTyp
     case SAVE_SESSION_ID:
       return { ...state, session_id: action.payload! };
     case DELETE_SESSION_ID:
+      sessionStorage.removeItem("session_id");
+
       return { ...state, session_id: null };
     default:
       return state;

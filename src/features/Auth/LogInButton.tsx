@@ -4,13 +4,15 @@ import { useTranslation } from "react-i18next";
 
 import * as api from "./Auth.api";
 
+const { REACT_APP_AUTH_REDIRECT_URL } = process.env;
+
 export const LogInButton = () => {
   const { t } = useTranslation();
 
   const logIn = () => {
     api.createRequestToken().then((request_token) => {
       window.location.replace(
-        `https://www.themoviedb.org/authenticate/${request_token}?redirect_to=http://localhost:3000/auth-page`
+        `https://www.themoviedb.org/authenticate/${request_token}?redirect_to=${REACT_APP_AUTH_REDIRECT_URL}`
       );
     });
   };

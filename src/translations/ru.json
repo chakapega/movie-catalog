@@ -20,5 +20,10 @@
   "Movie Lists": "Списки фильмов",
   "Permission approved": "Разрешение одобрено",
   "Finish authorization": "Завершить авторизацию",
-  "Created lists": "Созданные списки"
+  "Created lists": "Созданные списки",
+  "List name": "Название списка",
+  "List description": "Описание списка",
+  "Create list": "Создание списка",
+  "Success": "Успешно",
+  "Error": "Ошибка"
 }

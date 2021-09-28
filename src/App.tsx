@@ -10,7 +10,7 @@ import { RandomMovie } from "features/RandomMovie/RandomMovie.component";
 import { MovieDetails } from "features/MovieDetails/MovieDetails.component";
 import { AuthPage } from "features/Auth/AuthPage";
 import { ProtectedRoute } from "features/Auth/ProtectedRoute";
-import { MovieLists } from "features/MovieLists";
+import { MovieLists } from "features/MovieLists/MovieLists.component";
 
 const App = () => {
   const activeLanguage = useAppSelector((state) => state.language.activeLanguage);

@@ -20,5 +20,10 @@
   "Movie Lists": "Movie lists",
   "Permisson approved": "Permission approved",
   "Finish authorization": "Finish authorization",
-  "Created lists": "Created lists"
+  "Created lists": "Created lists",
+  "List name": "List name",
+  "List description": "List description",
+  "Create list": "Create list",
+  "Success": "Success",
+  "Error": "Error"
 }

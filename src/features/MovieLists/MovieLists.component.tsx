@@ -1,9 +1,12 @@
 import React, { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { useQuery } from "react-query";
+import { Container, Row, Col } from "react-bootstrap";
 
 import { useAppSelector } from "hooks/common";
 import * as accountApi from "features/Account/Account.api";
+import { CreateList } from "./CreateList";
+import { ListsList } from "./ListsList";
 
 export const MovieLists = () => {
   const { t } = useTranslation();
@@ -24,5 +27,22 @@ export const MovieLists = () => {
     }
   }, [session_id, accountDetails?.id, refetch]);
 
-  return <span className="m-3">{t("Created lists")}</span>;
+  return (
+    <Container>
+      <Row>
+        <Col>
+          <span className='m-5'>{t("Create list")}</span>
+          <CreateList refetch={refetch} />
+        </Col>
+      </Row>
+      <span className='m-3'>{t("Created lists")}</span>
+      {createdLists?.length && (
+        <Row>
+          <Col>
+            <ListsList lists={createdLists} />
+          </Col>
+        </Row>
+      )}
+    </Container>
+  );
 };

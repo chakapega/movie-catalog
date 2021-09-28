@@ -41,12 +41,12 @@ export const Filters: React.FC<FiltersProps> = ({
   }, [activeLanguage]);
 
   return (
-    <Row className='m-3'>
+    <Row className="m-3">
       {areGenresSuccess && (
-        <Col xs='auto'>
+        <Col xs="auto">
           <p>{t("Genre")}</p>
-          <Form.Select size='sm' value={genreId} onChange={changeGenre}>
-            <option value=''>{t("All")}</option>
+          <Form.Select size="sm" value={genreId} onChange={changeGenre}>
+            <option value="">{t("All")}</option>
             {genres.map(({ id, name }: GenreType) => (
               <option key={id} value={id}>
                 {name}
@@ -63,13 +63,13 @@ export const Filters: React.FC<FiltersProps> = ({
           endDate={endDate}
           isClearable={startDate}
           placeholderText={t("Start release date")}
-          dropdownMode='select'
+          dropdownMode="select"
           selectsStart
           peekNextMonth
           showMonthDropdown
           showYearDropdown
         />
-        <div className='data-pickers-separator' />
+        <div className="data-pickers-separator" />
         <DatePicker
           selected={endDate}
           onChange={(date) => changeEndDate(date)}
@@ -78,7 +78,7 @@ export const Filters: React.FC<FiltersProps> = ({
           minDate={startDate}
           isClearable={endDate}
           placeholderText={t("End release date")}
-          dropdownMode='select'
+          dropdownMode="select"
           selectsEnd
           peekNextMonth
           showMonthDropdown
@@ -86,7 +86,7 @@ export const Filters: React.FC<FiltersProps> = ({
         />
       </Col>
       <Col>
-        <Button variant='primary' onClick={submit} className='mt-3'>
+        <Button variant="primary" onClick={submit} className="mt-3">
           {t("Apply")}
         </Button>
       </Col>

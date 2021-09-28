@@ -17,5 +17,5 @@ export const AccountDetails = () => {
       : dispatch({ type: DELETE_ACCOUNT_DETAILS, payload: session_id });
   }, [session_id, dispatch]);
 
-  return accountDetails?.username ? <span className='m-3'>{accountDetails.username}</span> : null;
+  return accountDetails?.username ? <span className="m-3">{accountDetails.username}</span> : null;
 };

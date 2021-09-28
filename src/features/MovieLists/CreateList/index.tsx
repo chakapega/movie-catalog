@@ -35,27 +35,27 @@ export const CreateList: React.FC<{ refetch: Function }> = ({ refetch }) => {
 
   return (
     <>
-      <Form className='m-5'>
-        <Form.Group className='mb-3'>
+      <Form className="m-5">
+        <Form.Group className="mb-3">
           <Form.Label>{t("List name")}</Form.Label>
-          <Form.Control type='text' value={name} onChange={({ target: { value } }) => setName(value)} />
+          <Form.Control type="text" value={name} onChange={({ target: { value } }) => setName(value)} />
         </Form.Group>
-        <Form.Group className='mb-3'>
+        <Form.Group className="mb-3">
           <Form.Label>{t("List description")}</Form.Label>
           <Form.Control
-            as='textarea'
+            as="textarea"
             rows={2}
             value={description}
             onChange={({ target: { value } }) => setDescription(value)}
           />
         </Form.Group>
-        <Button variant='primary' onClick={() => createList()} disabled={!name || !description}>
+        <Button variant="primary" onClick={() => createList()} disabled={!name || !description}>
           {t("Create list")}
         </Button>
         {isShowToast && (
-          <Toast className='m-5' onClose={() => setIsShowToast(false)}>
+          <Toast className="m-5" onClose={() => setIsShowToast(false)}>
             <Toast.Header>
-              <strong className='me-auto'>{t(status!)}</strong>
+              <strong className="me-auto">{t(status!)}</strong>
             </Toast.Header>
           </Toast>
         )}

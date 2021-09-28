@@ -13,8 +13,8 @@ export const LanguageSwitcher = () => {
     dispatch({ type: CHANGE_LANGUAGE, payload: event.target.value });
 
   return (
-    <Col xs='auto'>
-      <Form.Select size='sm' value={activeLanguage} onChange={handleChange}>
+    <Col xs="auto">
+      <Form.Select size="sm" value={activeLanguage} onChange={handleChange}>
         {LANGUAGES.map((language) => (
           <option key={language} value={language}>
             {language}

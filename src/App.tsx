@@ -23,22 +23,22 @@ const App = () => {
     <>
       <Header />
       <Switch>
-        <Route exact path='/'>
+        <Route exact path="/">
           <Dashboard />
         </Route>
-        <Route path='/movies'>
+        <Route path="/movies">
           <Movies />
         </Route>
-        <Route path='/random-movie'>
+        <Route path="/random-movie">
           <RandomMovie />
         </Route>
-        <Route path='/movie-details/:id'>
+        <Route path="/movie-details/:id">
           <MovieDetails />
         </Route>
-        <Route path='/auth-page'>
+        <Route path="/auth-page">
           <AuthPage />
         </Route>
-        <ProtectedRoute path='/movie-lists' component={MovieLists} />
+        <ProtectedRoute path="/movie-lists" component={MovieLists} />
       </Switch>
     </>
   );

@@ -16,7 +16,7 @@ export const LogOutButton = () => {
   };
 
   return (
-    <Button className='m-3' variant='danger' onClick={() => deleteSession()}>
+    <Button className="m-3" variant="danger" onClick={() => deleteSession()}>
       {t("Log Out")}
     </Button>
   );

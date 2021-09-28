@@ -33,13 +33,13 @@ export const MovieDetails: React.FC<MovieDetailsProps> = ({ movieId }) => {
   return (
     <>
       {areMovieDetailsSuccess && (
-        <Container className='movie-details-container'>
+        <Container className="movie-details-container">
           <h3>{movieDetails.title}</h3>
           <p>{movieDetails.overview}</p>
           <Container>
             <Row>
               <Col>
-                <img src={getImageUrl(movieDetails.poster_path)} alt='poster' />
+                <img src={getImageUrl(movieDetails.poster_path)} alt="poster" />
               </Col>
               <Col>
                 <p>{`${t("Release date")}: ${movieDetails.release_date}`}</p>

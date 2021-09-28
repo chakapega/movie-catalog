@@ -6,5 +6,5 @@ import { useAppSelector } from "hooks/common";
 export const ProtectedRoute: React.FC<{ component: React.FC; path: string }> = ({ component, path }) => {
   const session_id = useAppSelector((state) => state.auth.session_id);
 
-  return session_id ? <Route component={component} path={path} /> : <Redirect to='/' />;
+  return session_id ? <Route component={component} path={path} /> : <Redirect to="/" />;
 };

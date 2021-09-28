@@ -35,7 +35,7 @@ export const CreateList: React.FC<{ refetch: Function }> = ({ refetch }) => {
 
   return (
     <>
-      <Form className="m-5">
+      <Form className="m-3">
         <Form.Group className="mb-3">
           <Form.Label>{t("List name")}</Form.Label>
           <Form.Control type="text" value={name} onChange={({ target: { value } }) => setName(value)} />

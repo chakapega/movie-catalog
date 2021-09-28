@@ -6,4 +6,5 @@ type List = {
 
 export type ListsListProps = {
   lists: Array<List>;
+  refetch: Function;
 };

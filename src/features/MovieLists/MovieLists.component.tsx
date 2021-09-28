@@ -31,18 +31,16 @@ export const MovieLists = () => {
     <Container>
       <Row>
         <Col>
-          <span className="m-5">{t("Create list")}</span>
+          <span>{t("Create list")}</span>
           <CreateList refetch={refetch} />
         </Col>
       </Row>
-      <span className="m-3">{t("Created lists")}</span>
-      {createdLists?.length && (
-        <Row>
-          <Col>
-            <ListsList lists={createdLists} />
-          </Col>
-        </Row>
-      )}
+      <Row>
+        <Col>
+          <span>{t("Created lists")}</span>
+          {createdLists?.length && <ListsList lists={createdLists} refetch={refetch} />}
+        </Col>
+      </Row>
     </Container>
   );
 };

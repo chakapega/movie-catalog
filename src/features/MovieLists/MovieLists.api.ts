@@ -18,3 +18,11 @@ export const createList = async (session_id: string, name: string, description: 
 
   return data;
 };
+
+export const deleteList = (session_id: string, list_id: number) => {
+  const query = qs.stringify({ api_key: REACT_APP_THE_MOVIE_DB_KEY, session_id });
+
+  return fetch(`${THE_MOVIE_DB_BASE_URL}/list/${list_id}?${query}`, {
+    method: "DELETE",
+  });
+};

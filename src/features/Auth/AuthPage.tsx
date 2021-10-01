@@ -20,7 +20,7 @@ export const AuthPage = () => {
     const session_id = await api.createSession(request_token);
 
     dispatch({ type: SAVE_SESSION_ID, payload: session_id });
-    sessionStorage.setItem("session_id", session_id);
+    localStorage.setItem("session_id", session_id);
     history.push("/");
   };
 

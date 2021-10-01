@@ -29,15 +29,15 @@ export const Dashboard = () => {
     <Container>
       <Row>
         <Col>
-          <h3>{t("Now playing")}</h3>
+          <h3 className="text-center">{t("Now playing")}</h3>
           {areNowPlayingMoviesAvailable && <MoviesList movies={limiteNumberOfMovies(nowPlayingMovies)} />}
         </Col>
         <Col>
-          <h3>{t("Upcoming")}</h3>
+          <h3 className="text-center">{t("Upcoming")}</h3>
           {areUpcomingMoviesAvailable && <MoviesList movies={limiteNumberOfMovies(upcomingMovies)} />}
         </Col>
         <Col>
-          <h3>{t("Popular")}</h3>
+          <h3 className="text-center">{t("Popular")}</h3>
           {arePopularMoviesAvailable && <MoviesList movies={limiteNumberOfMovies(popularMovies)} />}
         </Col>
       </Row>

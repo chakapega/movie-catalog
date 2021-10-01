@@ -18,7 +18,7 @@ export const ListsList: React.FC<ListsListProps> = ({ lists, refetch }) => {
     <ListGroup className="m-3">
       {lists.map(({ id, name }) => (
         <ListGroup.Item className="lists-list-item" key={id} action>
-          <LinkContainer exact to={`/list/${id}`}>
+          <LinkContainer exact to={`/movie-list/${id}`}>
             <Nav.Link className="lists-list-link">{name}</Nav.Link>
           </LinkContainer>
           <div onClick={() => deleteList(id)}>

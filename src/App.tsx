@@ -11,6 +11,7 @@ import { MovieDetails } from "features/MovieDetails/MovieDetails.component";
 import { AuthPage } from "features/Auth/AuthPage";
 import { ProtectedRoute } from "features/Auth/ProtectedRoute";
 import { MovieLists } from "features/MovieLists/MovieLists.component";
+import { ListDetails } from "features/MovieLists/ListDetails";
 
 const App = () => {
   const activeLanguage = useAppSelector((state) => state.language.activeLanguage);
@@ -39,6 +40,7 @@ const App = () => {
           <AuthPage />
         </Route>
         <ProtectedRoute path="/movie-lists" component={MovieLists} />
+        <ProtectedRoute path="/movie-list/:id" component={ListDetails} />
       </Switch>
     </>
   );

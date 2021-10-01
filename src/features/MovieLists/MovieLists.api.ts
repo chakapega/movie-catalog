@@ -26,3 +26,27 @@ export const deleteList = (session_id: string, list_id: number) => {
     method: "DELETE",
   });
 };
+
+export const getDetails = async (list_id: string) => {
+  const query = qs.stringify({ api_key: REACT_APP_THE_MOVIE_DB_KEY });
+
+  const response = await fetch(`${THE_MOVIE_DB_BASE_URL}/list/${list_id}?${query}`);
+  const listDetails = await response.json();
+
+  return listDetails;
+};
+
+export const addMovieToList = async (list_id: string, session_id: string, movieId: string) => {
+  const query = qs.stringify({ api_key: REACT_APP_THE_MOVIE_DB_KEY, session_id });
+
+  const response = await fetch(`${THE_MOVIE_DB_BASE_URL}/list/${list_id}/add_item?${query}`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ media_id: movieId }),
+  });
+  const result = await response.json();
+
+  return result;
+};

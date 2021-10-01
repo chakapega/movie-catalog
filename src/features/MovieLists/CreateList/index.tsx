@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Form, Button, Toast } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
 
-import { TEXT_INPUT_EMPTY_VALUE } from "constants/common";
+import { EMPTY_STRING_VALUE } from "constants/common";
 import * as api from "features/MovieLists/MovieLists.api";
 import { useAppSelector } from "hooks/common";
 
@@ -11,12 +11,12 @@ export const CreateList: React.FC<{ refetch: Function }> = ({ refetch }) => {
   const session_id = useAppSelector((state) => state.auth.session_id);
   const [isShowToast, setIsShowToast] = useState(false);
   const [status, setStatus] = useState<string>();
-  const [name, setName] = useState(TEXT_INPUT_EMPTY_VALUE);
-  const [description, setDescription] = useState(TEXT_INPUT_EMPTY_VALUE);
+  const [name, setName] = useState(EMPTY_STRING_VALUE);
+  const [description, setDescription] = useState(EMPTY_STRING_VALUE);
 
   const resetForm = () => {
-    setName(TEXT_INPUT_EMPTY_VALUE);
-    setDescription(TEXT_INPUT_EMPTY_VALUE);
+    setName(EMPTY_STRING_VALUE);
+    setDescription(EMPTY_STRING_VALUE);
   };
 
   const createList = () => {

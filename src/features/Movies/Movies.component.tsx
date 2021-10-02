@@ -59,7 +59,7 @@ export const Movies = () => {
       />
       {areMoviesSuccess && selectedFilters && (
         <>
-          <MoviesList width="w-50" movies={searchedMoviesData.results} />
+          <MoviesList width="w-25" movies={searchedMoviesData.results} />
           <Pagination page={page} totalPages={searchedMoviesData.total_pages} changePage={changePage} />
         </>
       )}

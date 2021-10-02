@@ -8,5 +8,8 @@ export type MoviesType = Array<MovieType>;
 
 export type MoviesListProps = {
   width?: string;
+  withDeleteButton?: boolean;
+  list_id?: string;
+  refetch?: Function;
   movies: MoviesType;
 };

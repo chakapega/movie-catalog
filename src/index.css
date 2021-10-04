@@ -45,3 +45,13 @@ code {
 .movies-list-poster {
   width: 100%;
 }
+
+.spinner-container {
+  position: fixed;
+  inset: 0;
+  z-index: 1061;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.5);
+}

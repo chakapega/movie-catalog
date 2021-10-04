@@ -12,6 +12,8 @@ import { AuthPage } from "features/Auth/AuthPage";
 import { ProtectedRoute } from "features/Auth/ProtectedRoute";
 import { MovieLists } from "features/MovieLists/MovieLists.component";
 import { ListDetails } from "features/MovieLists/ListDetails";
+import { Spinner } from "features/Spinner";
+import { Notice } from "features/Notice";
 
 const App = () => {
   const activeLanguage = useAppSelector((state) => state.language.activeLanguage);
@@ -42,6 +44,8 @@ const App = () => {
         <ProtectedRoute path="/movie-lists" component={MovieLists} />
         <ProtectedRoute path="/movie-list/:id" component={ListDetails} />
       </Switch>
+      <Spinner />
+      <Notice />
     </>
   );
 };

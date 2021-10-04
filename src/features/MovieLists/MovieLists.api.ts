@@ -20,12 +20,15 @@ export const createList = async (session_id: string, name: string, description: 
   return result;
 };
 
-export const deleteList = (session_id: string, list_id: number) => {
+export const deleteList = async (session_id: string, list_id: number) => {
   const query = qs.stringify({ api_key: REACT_APP_THE_MOVIE_DB_KEY, session_id });
 
-  return fetch(`${THE_MOVIE_DB_BASE_URL}/list/${list_id}?${query}`, {
+  const response = await fetch(`${THE_MOVIE_DB_BASE_URL}/list/${list_id}?${query}`, {
     method: "DELETE",
   });
+  const result = await response.json();
+
+  return result;
 };
 
 export const getListDetails = async (list_id: string) => {

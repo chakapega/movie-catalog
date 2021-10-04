@@ -15,9 +15,9 @@ export const createList = async (session_id: string, name: string, description: 
     },
     body: JSON.stringify({ name, description }),
   });
-  const data = await response.json();
+  const result = await response.json();
 
-  return data;
+  return result;
 };
 
 export const deleteList = (session_id: string, list_id: number) => {

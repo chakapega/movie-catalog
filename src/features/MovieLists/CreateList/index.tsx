@@ -1,16 +1,17 @@
 import React, { useState } from "react";
-import { Form, Button, Toast } from "react-bootstrap";
+import { Form, Button } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
 
-import { EMPTY_STRING_VALUE } from "constants/common";
+import { EMPTY_STRING_VALUE, INDEX_OF_FIRST_ELEMENT } from "constants/common";
 import * as api from "features/MovieLists/MovieLists.api";
-import { useAppSelector } from "hooks/common";
+import { useAppDispatch, useAppSelector } from "hooks/common";
+import { HIDE_SPINNER, SHOW_SPINNER } from "store/spinner/actionTypes";
+import { SHOW_NOTICE } from "store/notice/actionTypes";
 
 export const CreateList: React.FC<{ refetch: Function }> = ({ refetch }) => {
   const { t } = useTranslation();
+  const dispatch = useAppDispatch();
   const session_id = useAppSelector((state) => state.auth.session_id);
-  const [isShowToast, setIsShowToast] = useState(false);
-  const [status, setStatus] = useState<string>();
   const [name, setName] = useState(EMPTY_STRING_VALUE);
   const [description, setDescription] = useState(EMPTY_STRING_VALUE);
 
@@ -19,18 +20,22 @@ export const CreateList: React.FC<{ refetch: Function }> = ({ refetch }) => {
     setDescription(EMPTY_STRING_VALUE);
   };
 
-  const createList = () => {
-    api.createList(session_id!, name, description).then(({ success }) => {
-      if (success) {
-        setStatus("Success");
-        resetForm();
-        setIsShowToast(true);
-        refetch();
-      } else {
-        setStatus("Error");
-        setIsShowToast(true);
-      }
-    });
+  const createList = async () => {
+    dispatch({ type: SHOW_SPINNER });
+
+    const { success, status_message, errors } = await api.createList(session_id!, name, description);
+
+    dispatch({ type: HIDE_SPINNER });
+
+    if (success) {
+      resetForm();
+
+      dispatch({ type: SHOW_NOTICE, payload: status_message });
+    } else {
+      dispatch({ type: SHOW_NOTICE, payload: errors[INDEX_OF_FIRST_ELEMENT] });
+    }
+
+    refetch();
   };
 
   return (
@@ -52,13 +57,6 @@ export const CreateList: React.FC<{ refetch: Function }> = ({ refetch }) => {
         <Button variant="primary" onClick={() => createList()} disabled={!name || !description}>
           {t("Create list")}
         </Button>
-        {isShowToast && (
-          <Toast className="m-5" onClose={() => setIsShowToast(false)}>
-            <Toast.Header>
-              <strong className="me-auto">{t(status!)}</strong>
-            </Toast.Header>
-          </Toast>
-        )}
       </Form>
     </>
   );

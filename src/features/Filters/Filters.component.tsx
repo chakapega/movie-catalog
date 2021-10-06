@@ -8,8 +8,8 @@ import { useQuery } from "react-query";
 
 import { useAppSelector } from "hooks";
 import { Language } from "constants/language";
-import { FiltersProps, GenreType } from "./Filters.types";
-import { getGenres } from "features/Movies/Movies.api";
+import { FiltersProps, GenreType, ProviderType } from "./Filters.types";
+import * as api from "features/Filters/Filters.api";
 import { EMPTY_GENRES_VALUE } from "features/Movies/Movies.constants";
 
 import "react-datepicker/dist/react-datepicker.css";
@@ -20,7 +20,9 @@ registerLocale(Language.russian, russianLocale);
 export const Filters: React.FC<FiltersProps> = ({
   submit,
   genreId,
-  changeGenre,
+  changeGenreId,
+  providerId,
+  changeProviderId,
   startDate,
   changeStartDate,
   endDate,
@@ -29,10 +31,12 @@ export const Filters: React.FC<FiltersProps> = ({
   const { t } = useTranslation();
   const activeLanguage = useAppSelector((state) => state.language.activeLanguage);
 
-  const { isSuccess: areGenresSuccess, data: genres } = useQuery(
-    ["getGenres", activeLanguage],
-    () => getGenres(activeLanguage),
-    { initialData: EMPTY_GENRES_VALUE }
+  const { data: genres } = useQuery(["getGenres", activeLanguage], () => api.getGenres(activeLanguage), {
+    initialData: EMPTY_GENRES_VALUE,
+  });
+
+  const { data: providers } = useQuery(["getMovieProviders", activeLanguage], () =>
+    api.getMovieProviders(activeLanguage)
   );
 
   useEffect(() => {
@@ -41,14 +45,27 @@ export const Filters: React.FC<FiltersProps> = ({
 
   return (
     <Row className="m-3">
-      {areGenresSuccess && (
+      {genres.length && (
         <Col xs="auto">
           <p>{t("Genre")}</p>
-          <Form.Select size="sm" value={genreId} onChange={changeGenre}>
+          <Form.Select size="sm" value={genreId} onChange={changeGenreId}>
             <option value="">{t("All")}</option>
             {genres.map(({ id, name }: GenreType) => (
               <option key={id} value={id}>
                 {name}
+              </option>
+            ))}
+          </Form.Select>
+        </Col>
+      )}
+      {providers.length && (
+        <Col xs="auto">
+          <p>{t("Provider")}</p>
+          <Form.Select size="sm" value={providerId} onChange={changeProviderId}>
+            <option value="">{t("All")}</option>
+            {providers.map(({ provider_id, provider_name }: ProviderType) => (
+              <option key={provider_id} value={provider_id}>
+                {provider_name}
               </option>
             ))}
           </Form.Select>

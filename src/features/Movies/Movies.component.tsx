@@ -3,7 +3,7 @@ import { Container } from "react-bootstrap";
 import { useQuery } from "react-query";
 
 import { useAppSelector } from "hooks";
-import { getMoviesByFilters } from "./Movies.api";
+import { getMoviesByFilters } from "features/Filters/Filters.api";
 import { FIRST_PAGE } from "constants/common";
 import { Pagination } from "features/Pagination/Pagination.component";
 import { Filters } from "features/Filters/Filters.component";
@@ -14,7 +14,9 @@ export const Movies = () => {
   const activeLanguage = useAppSelector((state) => state.language.activeLanguage);
   const {
     genreId,
-    changeGenre,
+    changeGenreId,
+    providerId,
+    changeProviderId,
     startDate,
     changeStartDate,
     endDate,
@@ -52,7 +54,9 @@ export const Movies = () => {
       <Filters
         submit={submit}
         genreId={genreId}
-        changeGenre={changeGenre}
+        changeGenreId={changeGenreId}
+        providerId={providerId}
+        changeProviderId={changeProviderId}
         startDate={startDate}
         changeStartDate={changeStartDate}
         endDate={endDate}

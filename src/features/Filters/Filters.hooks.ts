@@ -5,20 +5,18 @@ import { getDateString } from "utils";
 
 const initialFilterValue = undefined;
 
-const initialFiltersState = {
-  genreId: initialFilterValue,
-  startDate: initialFilterValue,
-  endDate: initialFilterValue,
-};
-
 export const useFilters = () => {
-  const [genreId, setGenreId] = useState<string | undefined>(initialFiltersState.genreId);
-  const [startDate, setStartDate] = useState<any>(initialFiltersState.startDate);
-  const [endDate, setEndDate] = useState<any>(initialFiltersState.endDate);
+  const [genreId, setGenreId] = useState<string | undefined>(initialFilterValue);
+  const [providerId, setProviderId] = useState<string | undefined>(initialFilterValue);
+  const [startDate, setStartDate] = useState<any>(initialFilterValue);
+  const [endDate, setEndDate] = useState<any>(initialFilterValue);
   const [selectedFilters, setSelectedFilters] = useState<SelectedFiltersType>(null);
 
-  const changeGenre = (event: React.ChangeEvent<HTMLSelectElement>) =>
-    setGenreId(event.target.value || initialFiltersState.genreId);
+  const changeGenreId = (event: React.ChangeEvent<HTMLSelectElement>) =>
+    setGenreId(event.target.value || initialFilterValue);
+
+  const changeProviderId = (event: React.ChangeEvent<HTMLSelectElement>) =>
+    setProviderId(event.target.value || initialFilterValue);
 
   const changeStartDate = (date: Date) => setStartDate(date);
 
@@ -27,13 +25,16 @@ export const useFilters = () => {
   const changeSelectedFilters = () =>
     setSelectedFilters({
       genreId,
+      providerId,
       startDate: startDate ? getDateString(startDate) : startDate,
       endDate: endDate ? getDateString(endDate) : endDate,
     });
 
   return {
     genreId,
-    changeGenre,
+    changeGenreId,
+    providerId,
+    changeProviderId,
     startDate,
     changeStartDate,
     endDate,

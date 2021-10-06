@@ -4,16 +4,15 @@ import { Container, Row, Col, Button } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
 import { useQuery } from "react-query";
 
-import { useAppSelector } from "hooks/common";
+import { useAppSelector } from "hooks";
 import { getMovieInfo } from "./MovieDetails.api";
 import { getImageUrl, limiteNumberOfActors, limiteNumberOfMovies } from "utils";
 import { CastList } from "./CastList";
 import { RecommendedMoviesList } from "./RecommendedMoviesList";
 import { movieInfoType } from "./MovieDetails.constants";
-import { MovieDetailsProps } from "./types";
 import { AddMovieToList } from "features/MovieLists/AddMovieToList";
 
-export const MovieDetails: React.FC<MovieDetailsProps> = ({ movieId }) => {
+export const MovieDetails: React.FC<{ movieId?: string }> = ({ movieId }) => {
   const { t } = useTranslation();
   const { id } = useParams<{ id: string }>();
   const resultMovieId = movieId || id;

@@ -1,6 +1,7 @@
 import React from "react";
 import BootstrapSpinner from "react-bootstrap/Spinner";
-import { useAppSelector } from "hooks/common";
+
+import { useAppSelector } from "hooks";
 
 export const Spinner = () => {
   const isShowSpinner = useAppSelector((state) => state.spinner.isShowSpinner);

@@ -1,7 +1,7 @@
 import React from "react";
 import { ListGroup } from "react-bootstrap";
 
-import { CastListProps } from "../types";
+import { CastListProps } from "./types";
 
 export const CastList: React.FC<CastListProps> = ({ cast }) => (
   <ListGroup variant="flush">

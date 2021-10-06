@@ -1,14 +1,7 @@
 import { useState } from "react";
-import { useQuery } from "react-query";
-import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
 
-import type { AppDispatch, RootState } from "store/types";
-import { SelectedFiltersType } from "types/common";
+import { SelectedFiltersType } from "./Filters.types";
 import { getDateString } from "utils";
-import * as accountApi from "features/Account/Account.api";
-
-export const useAppDispatch = () => useDispatch<AppDispatch>();
-export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
 
 const initialFilterValue = undefined;
 
@@ -48,15 +41,4 @@ export const useFilters = () => {
     selectedFilters,
     changeSelectedFilters,
   };
-};
-
-export const useCreatedLists = () => {
-  const session_id = useAppSelector((state) => state.auth.session_id);
-  const accountDetails = useAppSelector((state) => state.account.accountDetails);
-
-  const { data: createdLists, refetch } = useQuery(["getCreatedLists", session_id, accountDetails?.id], () =>
-    accountApi.getCreatedLists(session_id, accountDetails!.id)
-  );
-
-  return { createdLists, refetch };
 };

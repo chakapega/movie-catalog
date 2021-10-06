@@ -3,10 +3,10 @@ import { ListGroup, Nav, Button } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
 import { useTranslation } from "react-i18next";
 
-import { useAppDispatch, useAppSelector } from "hooks/common";
-import { ListsListProps } from "features/MovieLists/types";
+import { useAppDispatch, useAppSelector } from "hooks";
 import * as api from "features/MovieLists/MovieLists.api";
 import { HIDE_SPINNER, SHOW_SPINNER } from "store/spinner/actionTypes";
+import { ListsListProps } from "./types";
 
 export const ListsList: React.FC<ListsListProps> = ({ lists, refetch }) => {
   const { t } = useTranslation();

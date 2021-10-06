@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 
-import { useAppSelector, useAppDispatch } from "hooks/common";
+import { useAppSelector, useAppDispatch } from "hooks";
 import * as api from "./Account.api";
 import { DELETE_ACCOUNT_DETAILS, SAVE_ACCOUNT_DETAILS } from "store/account/actionTypes";
 

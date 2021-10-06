@@ -3,10 +3,10 @@ import { useTranslation } from "react-i18next";
 import { Container, Row, Col } from "react-bootstrap";
 import { useQuery } from "react-query";
 
-import { useAppSelector } from "hooks/common";
+import { useAppSelector } from "hooks";
 import { movieType } from "./Dashboard.constants";
 import { getMovies } from "./Dashboard.api";
-import { MoviesList } from "./MoviesList";
+import { MoviesList } from "features/MoviesList/MoviesList.component";
 import { limiteNumberOfMovies } from "utils";
 
 export const Dashboard = () => {

@@ -4,7 +4,7 @@ import { useTranslation } from "react-i18next";
 
 import { EMPTY_STRING_VALUE, INDEX_OF_FIRST_ELEMENT } from "constants/common";
 import * as api from "features/MovieLists/MovieLists.api";
-import { useAppDispatch, useAppSelector } from "hooks/common";
+import { useAppDispatch, useAppSelector } from "hooks";
 import { HIDE_SPINNER, SHOW_SPINNER } from "store/spinner/actionTypes";
 import { SHOW_NOTICE } from "store/notice/actionTypes";
 

@@ -3,14 +3,15 @@ import { Modal, Button, Form } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
 import { useParams } from "react-router-dom";
 
-import { AddMovieToListProps, ListType } from "features/MovieLists/types";
-import { useAppDispatch, useAppSelector, useCreatedLists } from "hooks/common";
+import { useAppDispatch, useAppSelector } from "hooks";
 import { EMPTY_STRING_VALUE, INDEX_OF_FIRST_ELEMENT } from "constants/common";
 import * as api from "features/MovieLists/MovieLists.api";
 import { HIDE_SPINNER, SHOW_SPINNER } from "store/spinner/actionTypes";
 import { SHOW_NOTICE } from "store/notice/actionTypes";
+import { useCreatedLists } from "features/MovieLists/MovieLists.hooks";
+import { ListType } from "features/MovieLists/ListsList/types";
 
-export const AddMovieToList: React.FC<AddMovieToListProps> = ({ setShowAddMovieToList }) => {
+export const AddMovieToList: React.FC<{ setShowAddMovieToList: Function }> = ({ setShowAddMovieToList }) => {
   const { t } = useTranslation();
   const { id: movieId } = useParams<{ id: string }>();
   const session_id = useAppSelector((state) => state.auth.session_id);

@@ -3,10 +3,10 @@ import { Navbar, Nav } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
 import { LinkContainer } from "react-router-bootstrap";
 
-import { useAppSelector } from "hooks/common";
+import { useAppSelector } from "hooks";
 import { LanguageSwitcher } from "./LanguageSwitcher";
-import { AuthenticationButton } from "features/Auth/AuthenticationButton";
-import { AccountDetails } from "features/Account/AccountDetails";
+import { AuthenticationButton } from "features/Auth/AuthenticationButton.component";
+import { AccountDetails } from "features/Account/AccountDetails.component";
 
 export const Header = () => {
   const { t } = useTranslation();

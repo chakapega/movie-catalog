@@ -7,3 +7,14 @@ export type FiltersProps = {
   endDate?: any;
   changeEndDate: Function;
 };
+
+export type SelectedFiltersType = {
+  genreId?: string;
+  startDate?: string;
+  endDate?: string;
+} | null;
+
+export type GenreType = {
+  id: number;
+  name: string;
+};

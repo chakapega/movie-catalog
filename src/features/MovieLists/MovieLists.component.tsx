@@ -2,9 +2,9 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 import { Container, Row, Col } from "react-bootstrap";
 
-import { useCreatedLists } from "hooks/common";
 import { CreateList } from "./CreateList";
 import { ListsList } from "./ListsList";
+import { useCreatedLists } from "./MovieLists.hooks";
 
 export const MovieLists = () => {
   const { t } = useTranslation();

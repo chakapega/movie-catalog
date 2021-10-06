@@ -2,18 +2,18 @@ import React, { useEffect } from "react";
 import { Switch, Route } from "react-router-dom";
 import i18next from "i18next";
 
-import { useAppSelector } from "hooks/common";
+import { useAppSelector } from "hooks";
 import { Header } from "features/Header/Header.component";
 import { Dashboard } from "features/Dashboard/Dashboard.component";
 import { Movies } from "features/Movies/Movies.component";
 import { RandomMovie } from "features/RandomMovie/RandomMovie.component";
 import { MovieDetails } from "features/MovieDetails/MovieDetails.component";
-import { AuthPage } from "features/Auth/AuthPage";
-import { ProtectedRoute } from "features/Auth/ProtectedRoute";
+import { AuthPage } from "features/Auth/AuthPage.component";
+import { ProtectedRoute } from "features/Auth/ProtectedRoute.component";
 import { MovieLists } from "features/MovieLists/MovieLists.component";
 import { ListDetails } from "features/MovieLists/ListDetails";
-import { Spinner } from "features/Spinner";
-import { Notice } from "features/Notice";
+import { Spinner } from "features/Spinner/Spinner.component";
+import { Notice } from "features/Notice/Notice.component";
 
 const App = () => {
   const activeLanguage = useAppSelector((state) => state.language.activeLanguage);

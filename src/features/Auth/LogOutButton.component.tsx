@@ -1,7 +1,7 @@
 import React from "react";
 import { Button } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
-import { useAppSelector, useAppDispatch } from "hooks/common";
+import { useAppSelector, useAppDispatch } from "hooks";
 
 import * as api from "./Auth.api";
 import { DELETE_SESSION_ID } from "store/auth/actionTypes";

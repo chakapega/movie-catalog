@@ -3,10 +3,10 @@ import { ListGroup, Nav, Button } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
 import { useTranslation } from "react-i18next";
 
-import { MoviesListProps } from "features/Dashboard/types";
+import { MoviesListProps } from "./MoviesList.types";
 import { getImageUrl } from "utils";
 import * as api from "features/MovieLists/MovieLists.api";
-import { useAppDispatch, useAppSelector } from "hooks/common";
+import { useAppDispatch, useAppSelector } from "hooks";
 import { HIDE_SPINNER, SHOW_SPINNER } from "store/spinner/actionTypes";
 import { SHOW_NOTICE } from "store/notice/actionTypes";
 

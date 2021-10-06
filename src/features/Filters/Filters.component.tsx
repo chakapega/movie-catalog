@@ -6,10 +6,9 @@ import englishLocale from "date-fns/locale/en-US";
 import russianLocale from "date-fns/locale/ru";
 import { useQuery } from "react-query";
 
-import { useAppSelector } from "hooks/common";
+import { useAppSelector } from "hooks";
 import { Language } from "constants/language";
-import { FiltersProps } from "./types";
-import { GenreType } from "features/Movies/types";
+import { FiltersProps, GenreType } from "./Filters.types";
 import { getGenres } from "features/Movies/Movies.api";
 import { EMPTY_GENRES_VALUE } from "features/Movies/Movies.constants";
 

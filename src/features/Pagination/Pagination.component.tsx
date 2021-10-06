@@ -1,8 +1,8 @@
 import React from "react";
 import BootstrapPagination from "react-bootstrap/Pagination";
 import { useTranslation } from "react-i18next";
-import { FIRST_PAGE } from "constants/common";
 
+import { FIRST_PAGE } from "constants/common";
 import { PaginationProps } from "./types";
 
 export const Pagination: React.FC<PaginationProps> = ({ page, totalPages, changePage }) => {

@@ -2,7 +2,7 @@ import React from "react";
 import { Button, Modal } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
 
-import { useAppDispatch, useAppSelector } from "hooks/common";
+import { useAppDispatch, useAppSelector } from "hooks";
 import { HIDE_NOTICE } from "store/notice/actionTypes";
 
 export const Notice = () => {

@@ -3,7 +3,7 @@ import qs from "qs";
 import { LanguageType } from "store/language/types";
 import { getCountryCode } from "utils";
 import { THE_MOVIE_DB_BASE_URL } from "constants/api";
-import { SelectedFiltersType } from "types/common";
+import { SelectedFiltersType } from "features/Filters/Filters.types";
 
 const { REACT_APP_THE_MOVIE_DB_KEY } = process.env;
 

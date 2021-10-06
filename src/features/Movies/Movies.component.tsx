@@ -2,12 +2,13 @@ import React, { useEffect, useState } from "react";
 import { Container } from "react-bootstrap";
 import { useQuery } from "react-query";
 
-import { useAppSelector, useFilters } from "hooks/common";
+import { useAppSelector } from "hooks";
 import { getMoviesByFilters } from "./Movies.api";
 import { FIRST_PAGE } from "constants/common";
-import { Pagination } from "features/Pagination";
-import { MoviesList } from "features/Dashboard/MoviesList";
-import { Filters } from "features/Filters";
+import { Pagination } from "features/Pagination/Pagination.component";
+import { Filters } from "features/Filters/Filters.component";
+import { MoviesList } from "features/MoviesList/MoviesList.component";
+import { useFilters } from "features/Filters/Filters.hooks";
 
 export const Movies = () => {
   const activeLanguage = useAppSelector((state) => state.language.activeLanguage);

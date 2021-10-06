@@ -4,7 +4,7 @@ import { Container } from "react-bootstrap";
 import { useQuery } from "react-query";
 
 import * as api from "features/MovieLists/MovieLists.api";
-import { MoviesList } from "features/Dashboard/MoviesList";
+import { MoviesList } from "features/MoviesList/MoviesList.component";
 
 export const ListDetails = () => {
   const { id } = useParams<{ id: string }>();

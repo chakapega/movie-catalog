@@ -18,7 +18,7 @@ export const LogInButton = () => {
   };
 
   return (
-    <Button className="m-3" onClick={() => logIn()}>
+    <Button className="m-3" onClick={logIn}>
       {t("Log In")}
     </Button>
   );

@@ -28,7 +28,7 @@ export const AuthPage = () => {
     <>
       <span className="m-3">{approved ? t("Permission approved") : t("Permission denied")}</span>
       {approved && (
-        <Button className="m-3" onClick={() => finishAuthorization()}>
+        <Button className="m-3" onClick={finishAuthorization}>
           {t("Finish authorization")}
         </Button>
       )}

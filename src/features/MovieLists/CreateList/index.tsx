@@ -54,7 +54,7 @@ export const CreateList: React.FC<{ refetch: Function }> = ({ refetch }) => {
             onChange={({ target: { value } }) => setDescription(value)}
           />
         </Form.Group>
-        <Button variant="primary" onClick={() => createList()} disabled={!name || !description}>
+        <Button variant="primary" onClick={createList} disabled={!name || !description}>
           {t("Create list")}
         </Button>
       </Form>

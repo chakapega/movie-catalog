@@ -10,11 +10,15 @@ export const AccountDetails = () => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    session_id
-      ? api
-          .getDetails(session_id)
-          .then((accountDetails) => dispatch({ type: SAVE_ACCOUNT_DETAILS, payload: accountDetails }))
-      : dispatch({ type: DELETE_ACCOUNT_DETAILS, payload: session_id });
+    (async () => {
+      if (session_id) {
+        const accountDetails = await api.getDetails(session_id);
+
+        dispatch({ type: SAVE_ACCOUNT_DETAILS, payload: accountDetails });
+      } else {
+        dispatch({ type: DELETE_ACCOUNT_DETAILS, payload: session_id });
+      }
+    })();
   }, [session_id, dispatch]);
 
   return accountDetails?.username ? <span className="m-3">{accountDetails.username}</span> : null;

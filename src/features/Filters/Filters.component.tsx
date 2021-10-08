@@ -45,7 +45,7 @@ export const Filters: React.FC<FiltersProps> = ({
 
   return (
     <Row className="m-3">
-      {genres.length && (
+      {genres?.length && (
         <Col xs="auto">
           <p>{t("Genre")}</p>
           <Form.Select size="sm" value={genreId} onChange={changeGenreId}>
@@ -58,7 +58,7 @@ export const Filters: React.FC<FiltersProps> = ({
           </Form.Select>
         </Col>
       )}
-      {providers.length && (
+      {providers?.length && (
         <Col xs="auto">
           <p>{t("Provider")}</p>
           <Form.Select size="sm" value={providerId} onChange={changeProviderId}>

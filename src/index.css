@@ -32,10 +32,26 @@ code {
   width: auto;
 }
 
+.lists-list-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.lists-list-link {
+  width: 100%;
+}
+
+.movies-list-poster {
+  width: 100%;
+}
+
 .spinner-container {
-  width: 100vw;
-  height: 100vh;
+  position: fixed;
+  inset: 0;
+  z-index: 1061;
   display: flex;
   justify-content: center;
   align-items: center;
+  background: rgba(0, 0, 0, 0.5);
 }

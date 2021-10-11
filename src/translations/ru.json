@@ -17,6 +17,19 @@
   "End release date": "Конечная дата релиза",
   "Log In": "Авторизоваться",
   "Log Out": "Выйти",
-  "Movie Lists": "Списки фильмов"
-  
+  "Movie lists": "Списки фильмов",
+  "Permission approved": "Доступ одобрен",
+  "Permisson denied": "Доступ запрещен",
+  "Finish authorization": "Завершить авторизацию",
+  "Created lists": "Созданные списки",
+  "List name": "Название списка",
+  "List description": "Описание списка",
+  "Create list": "Создание списка",
+  "Success": "Успешно",
+  "Error": "Ошибка",
+  "Add to list": "Добавить в список",
+  "Close": "Закрыть",
+  "Add": "Добавить",
+  "Delete": "Удалить",
+  "Provider": "Провайдер"
 }

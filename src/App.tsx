@@ -1,48 +1,51 @@
 import React, { useEffect } from "react";
 import { Switch, Route } from "react-router-dom";
 import i18next from "i18next";
-import { useAuth0 } from "@auth0/auth0-react";
 
-import { useAppSelector } from "hooks/common";
+import { useAppSelector } from "store/hooks";
 import { Header } from "features/Header/Header.component";
 import { Dashboard } from "features/Dashboard/Dashboard.component";
 import { Movies } from "features/Movies/Movies.component";
 import { RandomMovie } from "features/RandomMovie/RandomMovie.component";
 import { MovieDetails } from "features/MovieDetails/MovieDetails.component";
-import { Loader } from "features/Loader";
-import { ProtectedRoute } from "features/Auth/ProtectedRoute";
-import { MovieLists } from "features/MovieLists";
+import { AuthPage } from "features/Auth/AuthPage.component";
+import { ProtectedRoute } from "features/Auth/ProtectedRoute.component";
+import { MovieLists } from "features/MovieLists/MovieLists.component";
+import { ListDetails } from "features/MovieLists/ListDetails";
+import { Spinner } from "features/Spinner/Spinner.component";
+import { Notice } from "features/Notice/Notice.component";
 
 const App = () => {
-  const { isLoading: isAuthLoading } = useAuth0();
-  const activeLanguage = useAppSelector((state) => state.language.activeLanguage);
+  const { activeLanguage } = useAppSelector((state) => state.language);
 
   useEffect(() => {
     i18next.changeLanguage(activeLanguage);
   }, [activeLanguage]);
 
-  if (isAuthLoading) {
-    return <Loader isFullScreen />;
-  }
-
   return (
     <>
       <Header />
       <Switch>
-        <Route exact path='/'>
+        <Route exact path="/">
           <Dashboard />
         </Route>
-        <Route path='/movies'>
+        <Route path="/movies">
           <Movies />
         </Route>
-        <Route path='/random-movie'>
+        <Route path="/random-movie">
           <RandomMovie />
         </Route>
-        <Route path='/movie-details/:id'>
+        <Route path="/movie-details/:id">
           <MovieDetails />
         </Route>
-        <ProtectedRoute path='/movie-lists' component={MovieLists} />
+        <Route path="/auth-page">
+          <AuthPage />
+        </Route>
+        <ProtectedRoute path="/movie-lists" component={MovieLists} />
+        <ProtectedRoute path="/movie-list/:id" component={ListDetails} />
       </Switch>
+      <Spinner />
+      <Notice />
     </>
   );
 };

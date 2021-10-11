@@ -2,18 +2,21 @@ import React, { useEffect, useState } from "react";
 import { Container } from "react-bootstrap";
 import { useQuery } from "react-query";
 
-import { useAppSelector, useFilters } from "hooks/common";
-import { getMoviesByFilters } from "./Movies.api";
+import { useAppSelector } from "store/hooks";
+import { getMoviesByFilters } from "features/Filters/Filters.api";
 import { FIRST_PAGE } from "constants/common";
-import { Pagination } from "features/Pagination";
-import { MoviesList } from "features/Dashboard/MoviesList";
-import { Filters } from "features/Filters";
+import { Pagination } from "features/Pagination/Pagination.component";
+import { Filters } from "features/Filters/Filters.component";
+import { MoviesList } from "features/MoviesList/MoviesList.component";
+import { useFilters } from "features/Filters/Filters.hooks";
 
 export const Movies = () => {
-  const activeLanguage = useAppSelector((state) => state.language.activeLanguage);
+  const { activeLanguage } = useAppSelector((state) => state.language);
   const {
     genreId,
-    changeGenre,
+    changeGenreId,
+    providerId,
+    changeProviderId,
     startDate,
     changeStartDate,
     endDate,
@@ -51,7 +54,9 @@ export const Movies = () => {
       <Filters
         submit={submit}
         genreId={genreId}
-        changeGenre={changeGenre}
+        changeGenreId={changeGenreId}
+        providerId={providerId}
+        changeProviderId={changeProviderId}
         startDate={startDate}
         changeStartDate={changeStartDate}
         endDate={endDate}
@@ -59,7 +64,7 @@ export const Movies = () => {
       />
       {areMoviesSuccess && selectedFilters && (
         <>
-          <MoviesList movies={searchedMoviesData.results} />
+          <MoviesList width="w-25" movies={searchedMoviesData.results} />
           <Pagination page={page} totalPages={searchedMoviesData.total_pages} changePage={changePage} />
         </>
       )}

@@ -1,18 +1,22 @@
-import React, { useEffect, useMemo } from "react";
+import React, { useEffect, useState } from "react";
 import { Container } from "react-bootstrap";
 
-import { Filters } from "features/Filters";
+import { Filters } from "features/Filters/Filters.component";
 import { getRandomMovieId } from "utils";
 import { useQuery } from "react-query";
-import { getMoviesByFilters } from "features/Movies/Movies.api";
-import { useAppSelector, useFilters } from "hooks/common";
+import { getMoviesByFilters } from "features/Filters/Filters.api";
+import { useAppSelector } from "store/hooks";
 import { MovieDetails } from "features/MovieDetails/MovieDetails.component";
+import { useFilters } from "features/Filters/Filters.hooks";
 
 export const RandomMovie = () => {
-  const activeLanguage = useAppSelector((state) => state.language.activeLanguage);
+  const { activeLanguage } = useAppSelector((state) => state.language);
+  const [randomMovieId, setRandomMovieId] = useState<string | null>(null);
   const {
     genreId,
-    changeGenre,
+    changeGenreId,
+    providerId,
+    changeProviderId,
     startDate,
     changeStartDate,
     endDate,
@@ -20,34 +24,37 @@ export const RandomMovie = () => {
     selectedFilters,
     changeSelectedFilters,
   } = useFilters();
-  const {
-    isSuccess: areMoviesSuccess,
-    data: searchedMoviesData,
-    refetch,
-  } = useQuery(["getMoviesByFilters", activeLanguage], () => getMoviesByFilters(activeLanguage, selectedFilters), {
-    refetchOnWindowFocus: false,
-    enabled: false,
-  });
+  const { data: searchedMoviesData, refetch } = useQuery(
+    ["getMoviesByFilters", activeLanguage],
+    () => getMoviesByFilters(activeLanguage, selectedFilters),
+    {
+      refetchOnWindowFocus: false,
+      enabled: false,
+    }
+  );
 
   useEffect(() => {
     if (selectedFilters) refetch();
   }, [refetch, selectedFilters, activeLanguage]);
 
+  useEffect(() => {
+    if (searchedMoviesData?.results) setRandomMovieId(getRandomMovieId(searchedMoviesData.results));
+  }, [searchedMoviesData?.results]);
+
   const submit = () => {
     changeSelectedFilters();
-  };
 
-  const randomMovieId = useMemo(
-    () => areMoviesSuccess && getRandomMovieId(searchedMoviesData.results),
-    [areMoviesSuccess, searchedMoviesData?.results]
-  );
+    searchedMoviesData?.results && setRandomMovieId(getRandomMovieId(searchedMoviesData.results));
+  };
 
   return (
     <Container>
       <Filters
         submit={submit}
         genreId={genreId}
-        changeGenre={changeGenre}
+        changeGenreId={changeGenreId}
+        providerId={providerId}
+        changeProviderId={changeProviderId}
         startDate={startDate}
         changeStartDate={changeStartDate}
         endDate={endDate}

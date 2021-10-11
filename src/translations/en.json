@@ -17,5 +17,19 @@
   "End release date": "End release date",
   "Log In": "Log In",
   "Log Out": "Log Out",
-  "Movie Lists": "Movie lists"
+  "Movie lists": "Movie lists",
+  "Permisson approved": "Permission approved",
+  "Permisson denied": "Permission denied",
+  "Finish authorization": "Finish authorization",
+  "Created lists": "Created lists",
+  "List name": "List name",
+  "List description": "List description",
+  "Create list": "Create list",
+  "Success": "Success",
+  "Error": "Error",
+  "Add to list": "Add to list",
+  "Close": "Close",
+  "Add": "Add",
+  "Delete": "Delete",
+  "Provider": "Provider"
 }

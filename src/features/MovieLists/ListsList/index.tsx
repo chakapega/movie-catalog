@@ -3,24 +3,23 @@ import { ListGroup, Nav, Button } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
 import { useTranslation } from "react-i18next";
 
-import { useAppDispatch, useAppSelector } from "hooks";
+import { useAppDispatch, useAppSelector } from "store/hooks";
 import * as api from "features/MovieLists/MovieLists.api";
-import { HIDE_SPINNER, SHOW_SPINNER } from "store/spinner/actionTypes";
+import { showSpinner, hideSpinner } from "store/spinner";
 import { ListsListProps } from "./types";
 
 export const ListsList: React.FC<ListsListProps> = ({ lists, refetch }) => {
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
-  const session_id = useAppSelector((state) => state.auth.session_id);
+  const { session_id } = useAppSelector((state) => state.auth);
 
   const deleteList = async (id: number) => {
-    dispatch({ type: SHOW_SPINNER });
+    dispatch(showSpinner());
 
     await api.deleteList(session_id!, id);
 
     refetch();
-
-    dispatch({ type: HIDE_SPINNER });
+    dispatch(hideSpinner());
   };
 
   return (

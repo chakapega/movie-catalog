@@ -3,14 +3,14 @@ import { Navbar, Nav } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
 import { LinkContainer } from "react-router-bootstrap";
 
-import { useAppSelector } from "hooks";
+import { useAppSelector } from "store/hooks";
 import { LanguageSwitcher } from "./LanguageSwitcher";
 import { AuthenticationButton } from "features/Auth/AuthenticationButton.component";
 import { AccountDetails } from "features/Account/AccountDetails.component";
 
 export const Header = () => {
   const { t } = useTranslation();
-  const session_id = useAppSelector((state) => state.auth.session_id);
+  const { session_id } = useAppSelector((state) => state.auth);
 
   return (
     <Navbar bg="light" expand="lg" className="header__navbar">

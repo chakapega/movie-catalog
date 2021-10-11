@@ -1,18 +1,22 @@
 import React from "react";
 import { Button } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
-import { useAppSelector, useAppDispatch } from "hooks";
+import { useAppSelector, useAppDispatch } from "store/hooks";
 
 import * as api from "./Auth.api";
-import { DELETE_SESSION_ID } from "store/auth/actionTypes";
+import { removeSessionId } from "store/auth";
 
 export const LogOutButton = () => {
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
-  const session_id = useAppSelector((state) => state.auth.session_id);
+  const { session_id } = useAppSelector((state) => state.auth);
 
   const deleteSession = () => {
-    api.deleteSession(session_id).then(() => dispatch({ type: DELETE_SESSION_ID }));
+    api.deleteSession(session_id).then(() => {
+      dispatch(removeSessionId());
+
+      localStorage.removeItem("session_id");
+    });
   };
 
   return (

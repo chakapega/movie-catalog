@@ -1,11 +1,10 @@
-import { useAppSelector } from "hooks";
+import { useAppSelector } from "store/hooks";
 import { useQuery } from "react-query";
 
 import * as accountApi from "features/Account/Account.api";
 
 export const useCreatedLists = () => {
-  const session_id = useAppSelector((state) => state.auth.session_id);
-  const accountDetails = useAppSelector((state) => state.account.accountDetails);
+  const { session_id, accountDetails } = useAppSelector((state) => state.auth);
 
   const { data: createdLists, refetch } = useQuery(["getCreatedLists", session_id, accountDetails?.id], () =>
     accountApi.getCreatedLists(session_id, accountDetails!.id)

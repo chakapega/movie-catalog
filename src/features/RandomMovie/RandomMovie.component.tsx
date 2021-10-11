@@ -5,12 +5,12 @@ import { Filters } from "features/Filters/Filters.component";
 import { getRandomMovieId } from "utils";
 import { useQuery } from "react-query";
 import { getMoviesByFilters } from "features/Filters/Filters.api";
-import { useAppSelector } from "hooks";
+import { useAppSelector } from "store/hooks";
 import { MovieDetails } from "features/MovieDetails/MovieDetails.component";
 import { useFilters } from "features/Filters/Filters.hooks";
 
 export const RandomMovie = () => {
-  const activeLanguage = useAppSelector((state) => state.language.activeLanguage);
+  const { activeLanguage } = useAppSelector((state) => state.language);
   const [randomMovieId, setRandomMovieId] = useState<string | null>(null);
   const {
     genreId,

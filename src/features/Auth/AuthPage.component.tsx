@@ -6,12 +6,12 @@ import { Button } from "react-bootstrap";
 import { useHistory } from "react-router-dom";
 
 import * as api from "./Auth.api";
-import { useAppDispatch } from "hooks";
-import { SAVE_SESSION_ID } from "store/auth/actionTypes";
+import { useAppDispatch } from "store/hooks";
+import { saveSessionId } from "store/auth";
 
 export const AuthPage = () => {
   const { t } = useTranslation();
-  let location = useLocation();
+  const location = useLocation();
   const dispatch = useAppDispatch();
   const history = useHistory();
   const { request_token, approved } = qs.parse(location.search, { ignoreQueryPrefix: true });
@@ -19,7 +19,7 @@ export const AuthPage = () => {
   const finishAuthorization = async () => {
     const session_id = await api.createSession(request_token);
 
-    dispatch({ type: SAVE_SESSION_ID, payload: session_id });
+    dispatch(saveSessionId(session_id));
     localStorage.setItem("session_id", session_id);
     history.push("/");
   };

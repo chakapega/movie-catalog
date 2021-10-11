@@ -1,12 +1,11 @@
 import React, { useEffect } from "react";
 
-import { useAppSelector, useAppDispatch } from "hooks";
+import { useAppSelector, useAppDispatch } from "store/hooks";
 import * as api from "./Account.api";
-import { DELETE_ACCOUNT_DETAILS, SAVE_ACCOUNT_DETAILS } from "store/account/actionTypes";
+import { saveAccountDetails, removeAccountDetails } from "store/auth";
 
 export const AccountDetails = () => {
-  const session_id = useAppSelector((state) => state.auth.session_id);
-  const accountDetails = useAppSelector((state) => state.account.accountDetails);
+  const { session_id, accountDetails } = useAppSelector((state) => state.auth);
   const dispatch = useAppDispatch();
 
   useEffect(() => {
@@ -14,9 +13,9 @@ export const AccountDetails = () => {
       if (session_id) {
         const accountDetails = await api.getDetails(session_id);
 
-        dispatch({ type: SAVE_ACCOUNT_DETAILS, payload: accountDetails });
+        dispatch(saveAccountDetails(accountDetails));
       } else {
-        dispatch({ type: DELETE_ACCOUNT_DETAILS, payload: session_id });
+        dispatch(removeAccountDetails());
       }
     })();
   }, [session_id, dispatch]);

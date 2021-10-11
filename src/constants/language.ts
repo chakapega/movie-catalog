@@ -9,3 +9,5 @@ export const COUNTRY_CODES = {
   en: "en-US",
   ru: "ru-RU",
 };
+
+export const DEFAULT_LANGUAGE = "en";

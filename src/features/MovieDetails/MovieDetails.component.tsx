@@ -4,7 +4,7 @@ import { Container, Row, Col, Button } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
 import { useQuery } from "react-query";
 
-import { useAppSelector } from "hooks";
+import { useAppSelector } from "store/hooks";
 import { getMovieInfo } from "./MovieDetails.api";
 import { getImageUrl, limiteNumberOfActors, limiteNumberOfMovies } from "utils";
 import { CastList } from "./CastList";
@@ -16,8 +16,8 @@ export const MovieDetails: React.FC<{ movieId?: string }> = ({ movieId }) => {
   const { t } = useTranslation();
   const { id } = useParams<{ id: string }>();
   const resultMovieId = movieId || id;
-  const activeLanguage = useAppSelector((state) => state.language.activeLanguage);
-  const session_id = useAppSelector((state) => state.auth.session_id);
+  const { activeLanguage } = useAppSelector((state) => state.language);
+  const { session_id } = useAppSelector((state) => state.auth);
   const [showAddMovieToList, setShowAddMovieToList] = useState(false);
   const { isSuccess: areMovieDetailsSuccess, data: movieDetails } = useQuery(
     [movieInfoType.details, resultMovieId, activeLanguage],

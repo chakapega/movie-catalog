@@ -3,18 +3,18 @@ import { Modal, Button, Form } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
 import { useParams } from "react-router-dom";
 
-import { useAppDispatch, useAppSelector } from "hooks";
+import { useAppDispatch, useAppSelector } from "store/hooks";
 import { EMPTY_STRING_VALUE, INDEX_OF_FIRST_ELEMENT } from "constants/common";
 import * as api from "features/MovieLists/MovieLists.api";
-import { HIDE_SPINNER, SHOW_SPINNER } from "store/spinner/actionTypes";
-import { SHOW_NOTICE } from "store/notice/actionTypes";
+import { showSpinner, hideSpinner } from "store/spinner";
+import { showNotice } from "store/notice";
 import { useCreatedLists } from "features/MovieLists/MovieLists.hooks";
 import { ListType } from "features/MovieLists/ListsList/types";
 
 export const AddMovieToList: React.FC<{ setShowAddMovieToList: Function }> = ({ setShowAddMovieToList }) => {
   const { t } = useTranslation();
   const { id: movieId } = useParams<{ id: string }>();
-  const session_id = useAppSelector((state) => state.auth.session_id);
+  const { session_id } = useAppSelector((state) => state.auth);
   const [selectedListId, setSelectedListId] = useState<string>(EMPTY_STRING_VALUE);
   const dispatch = useAppDispatch();
   const { createdLists } = useCreatedLists();
@@ -28,13 +28,12 @@ export const AddMovieToList: React.FC<{ setShowAddMovieToList: Function }> = ({ 
   const changeSelectedListId = (event: React.ChangeEvent<HTMLSelectElement>) => setSelectedListId(event.target.value);
 
   const addMovieToList = async () => {
-    dispatch({ type: SHOW_SPINNER });
+    dispatch(showSpinner());
 
     const { status_message } = await api.addMovieToList(selectedListId, session_id!, movieId);
 
-    dispatch({ type: HIDE_SPINNER });
-    dispatch({ type: SHOW_NOTICE, payload: status_message });
-
+    dispatch(hideSpinner());
+    dispatch(showNotice(status_message));
     handleClose();
   };
 

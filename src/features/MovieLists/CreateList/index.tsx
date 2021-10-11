@@ -4,14 +4,14 @@ import { useTranslation } from "react-i18next";
 
 import { EMPTY_STRING_VALUE, INDEX_OF_FIRST_ELEMENT } from "constants/common";
 import * as api from "features/MovieLists/MovieLists.api";
-import { useAppDispatch, useAppSelector } from "hooks";
-import { HIDE_SPINNER, SHOW_SPINNER } from "store/spinner/actionTypes";
-import { SHOW_NOTICE } from "store/notice/actionTypes";
+import { useAppDispatch, useAppSelector } from "store/hooks";
+import { showSpinner, hideSpinner } from "store/spinner";
+import { showNotice } from "store/notice";
 
 export const CreateList: React.FC<{ refetch: Function }> = ({ refetch }) => {
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
-  const session_id = useAppSelector((state) => state.auth.session_id);
+  const { session_id } = useAppSelector((state) => state.auth);
   const [name, setName] = useState(EMPTY_STRING_VALUE);
   const [description, setDescription] = useState(EMPTY_STRING_VALUE);
 
@@ -21,18 +21,17 @@ export const CreateList: React.FC<{ refetch: Function }> = ({ refetch }) => {
   };
 
   const createList = async () => {
-    dispatch({ type: SHOW_SPINNER });
+    dispatch(showSpinner());
 
     const { success, status_message, errors } = await api.createList(session_id!, name, description);
 
-    dispatch({ type: HIDE_SPINNER });
+    dispatch(hideSpinner());
 
     if (success) {
       resetForm();
-
-      dispatch({ type: SHOW_NOTICE, payload: status_message });
+      dispatch(showNotice(status_message));
     } else {
-      dispatch({ type: SHOW_NOTICE, payload: errors[INDEX_OF_FIRST_ELEMENT] });
+      dispatch(showNotice(errors[INDEX_OF_FIRST_ELEMENT]));
     }
 
     refetch();

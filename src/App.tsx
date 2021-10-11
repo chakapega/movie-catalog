@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { Switch, Route } from "react-router-dom";
 import i18next from "i18next";
 
-import { useAppSelector } from "hooks";
+import { useAppSelector } from "store/hooks";
 import { Header } from "features/Header/Header.component";
 import { Dashboard } from "features/Dashboard/Dashboard.component";
 import { Movies } from "features/Movies/Movies.component";
@@ -16,7 +16,7 @@ import { Spinner } from "features/Spinner/Spinner.component";
 import { Notice } from "features/Notice/Notice.component";
 
 const App = () => {
-  const activeLanguage = useAppSelector((state) => state.language.activeLanguage);
+  const { activeLanguage } = useAppSelector((state) => state.language);
 
   useEffect(() => {
     i18next.changeLanguage(activeLanguage);

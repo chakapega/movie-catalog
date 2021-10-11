@@ -3,7 +3,7 @@ import { useTranslation } from "react-i18next";
 import { Container, Row, Col } from "react-bootstrap";
 import { useQuery } from "react-query";
 
-import { useAppSelector } from "hooks";
+import { useAppSelector } from "store/hooks";
 import { movieType } from "./Dashboard.constants";
 import { getMovies } from "./Dashboard.api";
 import { MoviesList } from "features/MoviesList/MoviesList.component";
@@ -11,7 +11,7 @@ import { limiteNumberOfMovies } from "utils";
 
 export const Dashboard = () => {
   const { t } = useTranslation();
-  const activeLanguage = useAppSelector((state) => state.language.activeLanguage);
+  const { activeLanguage } = useAppSelector((state) => state.language);
   const { isSuccess: areNowPlayingMoviesAvailable, data: nowPlayingMovies } = useQuery(
     [movieType.nowPlaying, activeLanguage],
     () => getMovies(movieType.nowPlaying, activeLanguage)

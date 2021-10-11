@@ -6,7 +6,7 @@ import englishLocale from "date-fns/locale/en-US";
 import russianLocale from "date-fns/locale/ru";
 import { useQuery } from "react-query";
 
-import { useAppSelector } from "hooks";
+import { useAppSelector } from "store/hooks";
 import { Language } from "constants/language";
 import { FiltersProps, GenreType, ProviderType } from "./Filters.types";
 import * as api from "features/Filters/Filters.api";
@@ -29,7 +29,7 @@ export const Filters: React.FC<FiltersProps> = ({
   changeEndDate,
 }) => {
   const { t } = useTranslation();
-  const activeLanguage = useAppSelector((state) => state.language.activeLanguage);
+  const { activeLanguage } = useAppSelector((state) => state.language);
 
   const { data: genres } = useQuery(["getGenres", activeLanguage], () => api.getGenres(activeLanguage), {
     initialData: EMPTY_GENRES_VALUE,

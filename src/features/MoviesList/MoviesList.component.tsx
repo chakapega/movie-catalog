@@ -6,22 +6,22 @@ import { useTranslation } from "react-i18next";
 import { MoviesListProps } from "./MoviesList.types";
 import { getImageUrl } from "utils";
 import * as api from "features/MovieLists/MovieLists.api";
-import { useAppDispatch, useAppSelector } from "hooks";
-import { HIDE_SPINNER, SHOW_SPINNER } from "store/spinner/actionTypes";
-import { SHOW_NOTICE } from "store/notice/actionTypes";
+import { useAppDispatch, useAppSelector } from "store/hooks";
+import { showSpinner, hideSpinner } from "store/spinner";
+import { showNotice } from "store/notice";
 
 export const MoviesList: React.FC<MoviesListProps> = ({ width, withDeleteButton, list_id, refetch, movies }) => {
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
-  const session_id = useAppSelector((state) => state.auth.session_id);
+  const { session_id } = useAppSelector((state) => state.auth);
 
   const deleteMovieFromList = async (id: number) => {
-    dispatch({ type: SHOW_SPINNER });
+    dispatch(showSpinner());
 
     const { status_message } = await api.deleteMovieFromList(list_id!, session_id, id);
 
-    dispatch({ type: HIDE_SPINNER });
-    dispatch({ type: SHOW_NOTICE, payload: status_message });
+    dispatch(hideSpinner());
+    dispatch(showNotice(status_message));
 
     refetch!();
   };

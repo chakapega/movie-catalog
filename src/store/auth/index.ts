@@ -1,10 +1,9 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-import { SessionIdType, AccountDetailsType } from "./types";
+import { SessionIdType } from "./types";
 
-const initialState: { session_id: SessionIdType; accountDetails: AccountDetailsType } = {
+const initialState: { session_id: SessionIdType } = {
   session_id: localStorage.getItem("session_id") || null,
-  accountDetails: null,
 };
 
 const authSlice = createSlice({
@@ -17,15 +16,9 @@ const authSlice = createSlice({
     removeSessionId: (state) => {
       state.session_id = null;
     },
-    saveAccountDetails: (state, action: PayloadAction<AccountDetailsType>) => {
-      state.accountDetails = action.payload;
-    },
-    removeAccountDetails: (state) => {
-      state.accountDetails = null;
-    },
   },
 });
 
-export const { saveSessionId, removeSessionId, saveAccountDetails, removeAccountDetails } = authSlice.actions;
+export const { saveSessionId, removeSessionId } = authSlice.actions;
 
 export default authSlice.reducer;

@@ -1,42 +1,44 @@
 import qs from "qs";
+import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 import { THE_MOVIE_DB_BASE_URL } from "constants/api";
-import { SessionIdType } from "store/auth/types";
 
 const { REACT_APP_THE_MOVIE_DB_KEY } = process.env;
 
-export const createRequestToken = async () => {
-  const query = qs.stringify({ api_key: REACT_APP_THE_MOVIE_DB_KEY });
+export const authApi = createApi({
+  reducerPath: "authApi",
+  baseQuery: fetchBaseQuery({ baseUrl: THE_MOVIE_DB_BASE_URL }),
+  endpoints: (builder) => ({
+    createRequestToken: builder.mutation({
+      query: () => {
+        const query = qs.stringify({ api_key: REACT_APP_THE_MOVIE_DB_KEY });
 
-  const response = await fetch(`${THE_MOVIE_DB_BASE_URL}/authentication/token/new?${query}`);
-  const { request_token } = await response.json();
+        return `authentication/token/new?${query}`;
+      },
+    }),
+    createSession: builder.mutation({
+      query: (request_token) => {
+        const query = qs.stringify({ api_key: REACT_APP_THE_MOVIE_DB_KEY });
 
-  return request_token;
-};
+        return {
+          url: `authentication/session/new?${query}`,
+          method: "POST",
+          body: { request_token },
+        };
+      },
+    }),
+    deleteSession: builder.mutation({
+      query: (session_id) => {
+        const query = qs.stringify({ api_key: REACT_APP_THE_MOVIE_DB_KEY });
 
-export const createSession = async (request_token: string | string[] | qs.ParsedQs | qs.ParsedQs[] | undefined) => {
-  const query = qs.stringify({ api_key: REACT_APP_THE_MOVIE_DB_KEY });
+        return {
+          url: `authentication/session?${query}`,
+          method: "DELETE",
+          body: { session_id },
+        };
+      },
+    }),
+  }),
+});
 
-  const response = await fetch(`${THE_MOVIE_DB_BASE_URL}/authentication/session/new?${query}`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({ request_token }),
-  });
-  const { session_id } = await response.json();
-
-  return session_id;
-};
-
-export const deleteSession = async (session_id: SessionIdType) => {
-  const query = qs.stringify({ api_key: REACT_APP_THE_MOVIE_DB_KEY });
-
-  return fetch(`${THE_MOVIE_DB_BASE_URL}/authentication/session?${query}`, {
-    method: "DELETE",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({ session_id }),
-  });
-};
+export const { useCreateRequestTokenMutation, useCreateSessionMutation, useDeleteSessionMutation } = authApi;

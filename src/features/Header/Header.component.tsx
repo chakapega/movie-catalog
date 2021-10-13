@@ -33,7 +33,7 @@ export const Header = () => {
           )}
         </Nav>
         <LanguageSwitcher />
-        <AccountDetails />
+        {session_id && <AccountDetails />}
         <AuthenticationButton />
       </Navbar.Collapse>
     </Navbar>

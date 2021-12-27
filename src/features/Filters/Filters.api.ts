@@ -1,13 +1,13 @@
 import qs from "qs";
 
 import { THE_MOVIE_DB_BASE_URL } from "constants/api";
-import { ActiveLanguageType } from "store/language/types";
+import { ActiveLanguage } from "store/language/types";
 import { getCountryCode } from "utils";
 import { SelectedFiltersType } from "features/Filters/Filters.types";
 
 const { REACT_APP_THE_MOVIE_DB_KEY } = process.env;
 
-export const getMovieProviders = async (activeLanguage: ActiveLanguageType) => {
+export const getMovieProviders = async (activeLanguage: ActiveLanguage) => {
   const countryCode = getCountryCode(activeLanguage);
   const query = qs.stringify({ api_key: REACT_APP_THE_MOVIE_DB_KEY, language: countryCode });
 
@@ -17,7 +17,7 @@ export const getMovieProviders = async (activeLanguage: ActiveLanguageType) => {
   return results;
 };
 
-export const getGenres = async (activeLanguage: ActiveLanguageType) => {
+export const getGenres = async (activeLanguage: ActiveLanguage) => {
   const countryCode = getCountryCode(activeLanguage);
   const query = qs.stringify({ api_key: REACT_APP_THE_MOVIE_DB_KEY, language: countryCode });
 
@@ -28,7 +28,7 @@ export const getGenres = async (activeLanguage: ActiveLanguageType) => {
 };
 
 export const getMoviesByFilters = async (
-  activeLanguage: ActiveLanguageType,
+  activeLanguage: ActiveLanguage,
   selectedFilters: SelectedFiltersType,
   page?: number
 ) => {

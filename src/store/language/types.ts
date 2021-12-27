@@ -1,1 +1,1 @@
-export type ActiveLanguageType = string;
+export type ActiveLanguage = string;

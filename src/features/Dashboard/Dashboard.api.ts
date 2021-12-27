@@ -1,17 +1,26 @@
 import qs from "qs";
+import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 import { THE_MOVIE_DB_BASE_URL } from "constants/api";
-import { ActiveLanguageType } from "store/language/types";
 import { getCountryCode } from "utils";
+import { GetMoviesResponse, GetMoviesArgs } from "./Dashboard.types";
 
 const { REACT_APP_THE_MOVIE_DB_KEY } = process.env;
 
-export const getMovies = async (moviesType: string, activeLanguage: ActiveLanguageType) => {
-  const countryCode = getCountryCode(activeLanguage);
-  const query = qs.stringify({ api_key: REACT_APP_THE_MOVIE_DB_KEY, language: countryCode });
+export const dashboardApi = createApi({
+  reducerPath: "dashboardApi",
+  baseQuery: fetchBaseQuery({ baseUrl: THE_MOVIE_DB_BASE_URL }),
+  endpoints: (builder) => ({
+    getMovies: builder.query({
+      query: ({ moviesType, activeLanguage }: GetMoviesArgs) => {
+        const countryCode = getCountryCode(activeLanguage);
+        const query = qs.stringify({ api_key: REACT_APP_THE_MOVIE_DB_KEY, language: countryCode });
 
-  const response = await fetch(`${THE_MOVIE_DB_BASE_URL}/movie/${moviesType}?${query}`);
-  const { results } = await response.json();
+        return `movie/${moviesType}?${query}`;
+      },
+      transformResponse: (response: GetMoviesResponse) => response.results,
+    }),
+  }),
+});
 
-  return results;
-};
+export const { useGetMoviesQuery } = dashboardApi;

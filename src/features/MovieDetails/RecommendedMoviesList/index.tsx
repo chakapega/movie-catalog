@@ -1,9 +1,9 @@
 import React from "react";
 import { ListGroup } from "react-bootstrap";
 
-import { MoviesType } from "features/MoviesList/MoviesList.types";
+import { Movies } from "features/Dashboard/Dashboard.types";
 
-export const RecommendedMoviesList: React.FC<{ recommendedMovies: MoviesType }> = ({ recommendedMovies }) => (
+export const RecommendedMoviesList: React.FC<{ recommendedMovies: Movies }> = ({ recommendedMovies }) => (
   <ListGroup variant="flush">
     {recommendedMovies.map(({ id, title }) => (
       <ListGroup.Item key={id}>{title}</ListGroup.Item>

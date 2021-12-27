@@ -7,6 +7,7 @@ import notice from "./notice";
 import spinner from "./spinner";
 import { accountApi } from "features/Account/Account.api";
 import { authApi } from "features/Auth/Auth.api";
+import { dashboardApi } from "features/Dashboard/Dashboard.api";
 
 export const store = configureStore({
   reducer: {
@@ -17,6 +18,8 @@ export const store = configureStore({
     spinner,
     [accountApi.reducerPath]: accountApi.reducer,
     [authApi.reducerPath]: authApi.reducer,
+    [dashboardApi.reducerPath]: dashboardApi.reducer,
   },
-  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(accountApi.middleware, authApi.middleware),
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware().concat(accountApi.middleware, authApi.middleware, dashboardApi.middleware),
 });

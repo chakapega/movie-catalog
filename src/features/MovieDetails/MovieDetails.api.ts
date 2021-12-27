@@ -1,13 +1,13 @@
 import qs from "qs";
 
 import { THE_MOVIE_DB_BASE_URL } from "constants/api";
-import { ActiveLanguageType } from "store/language/types";
+import { ActiveLanguage } from "store/language/types";
 import { getCountryCode } from "utils";
 import { movieInfoType } from "./MovieDetails.constants";
 
 const { REACT_APP_THE_MOVIE_DB_KEY } = process.env;
 
-export const getMovieInfo = async (infoType: string, movieId: string, activeLanguage: ActiveLanguageType) => {
+export const getMovieInfo = async (infoType: string, movieId: string, activeLanguage: ActiveLanguage) => {
   const countryCode = getCountryCode(activeLanguage);
   const query = qs.stringify({ api_key: REACT_APP_THE_MOVIE_DB_KEY, language: countryCode });
 

@@ -1,15 +1,9 @@
-type MovieType = {
-  id: number;
-  title: string;
-  poster_path: string;
-};
-
-export type MoviesType = Array<MovieType>;
+import { Movies } from 'features/Dashboard/Dashboard.types';
 
 export type MoviesListProps = {
   width?: string;
   withDeleteButton?: boolean;
   list_id?: string;
   refetch?: Function;
-  movies: MoviesType;
+  movies: Movies;
 };

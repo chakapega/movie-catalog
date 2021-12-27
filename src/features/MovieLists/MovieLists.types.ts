@@ -1,8 +1,8 @@
-import { MoviesType } from "features/MoviesList/MoviesList.types";
+import { Movies } from "features/Dashboard/Dashboard.types";
 
 export type ListDetailsType = {
   id: string;
   name: string;
   description: string;
-  items: MoviesType;
+  items: Movies;
 };

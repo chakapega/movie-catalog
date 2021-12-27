@@ -1,9 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Container } from "react-bootstrap";
-import { useQuery } from "react-query";
 
 import { useAppSelector } from "store/hooks";
-import { getMoviesByFilters } from "features/Filters/Filters.api";
+import { useGetMoviesByFiltersQuery } from "features/Filters/Filters.api";
 import { FIRST_PAGE } from "constants/common";
 import { Pagination } from "features/Pagination/Pagination.component";
 import { Filters } from "features/Filters/Filters.component";
@@ -25,22 +24,10 @@ export const Movies = () => {
     changeSelectedFilters,
   } = useFilters();
   const [page, setPage] = useState(FIRST_PAGE);
-  const {
-    isSuccess: areMoviesSuccess,
-    data: searchedMoviesData,
-    refetch,
-  } = useQuery(
-    ["getMoviesByFilters", activeLanguage, page],
-    () => getMoviesByFilters(activeLanguage, selectedFilters, page),
-    {
-      refetchOnWindowFocus: false,
-      enabled: false,
-    }
+  const { data: searchedMoviesData } = useGetMoviesByFiltersQuery(
+    { activeLanguage, selectedFilters, page },
+    { skip: !selectedFilters }
   );
-
-  useEffect(() => {
-    if (selectedFilters) refetch();
-  }, [refetch, selectedFilters, activeLanguage, page]);
 
   const changePage = (selectedPage: number) => setPage(selectedPage);
 
@@ -62,11 +49,9 @@ export const Movies = () => {
         endDate={endDate}
         changeEndDate={changeEndDate}
       />
-      {areMoviesSuccess && selectedFilters && (
-        <>
-          <MoviesList width="w-25" movies={searchedMoviesData.results} />
-          <Pagination page={page} totalPages={searchedMoviesData.total_pages} changePage={changePage} />
-        </>
+      {searchedMoviesData?.results?.length && <MoviesList width="w-25" movies={searchedMoviesData.results} />}
+      {searchedMoviesData?.total_pages && (
+        <Pagination page={page} totalPages={searchedMoviesData.total_pages} changePage={changePage} />
       )}
     </Container>
   );

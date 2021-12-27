@@ -4,13 +4,11 @@ import { useTranslation } from "react-i18next";
 import DatePicker, { registerLocale, setDefaultLocale } from "react-datepicker";
 import englishLocale from "date-fns/locale/en-US";
 import russianLocale from "date-fns/locale/ru";
-import { useQuery } from "react-query";
 
 import { useAppSelector } from "store/hooks";
 import { Language } from "constants/language";
-import { FiltersProps, GenreType, ProviderType } from "./Filters.types";
-import * as api from "features/Filters/Filters.api";
-import { EMPTY_GENRES_VALUE } from "features/Movies/Movies.constants";
+import { FiltersProps, Genre, Provider } from "./Filters.types";
+import { useGetGenresQuery, useGetMovieProvidersQuery } from "./Filters.api";
 
 import "react-datepicker/dist/react-datepicker.css";
 
@@ -30,14 +28,8 @@ export const Filters: React.FC<FiltersProps> = ({
 }) => {
   const { t } = useTranslation();
   const { activeLanguage } = useAppSelector((state) => state.language);
-
-  const { data: genres } = useQuery(["getGenres", activeLanguage], () => api.getGenres(activeLanguage), {
-    initialData: EMPTY_GENRES_VALUE,
-  });
-
-  const { data: providers } = useQuery(["getMovieProviders", activeLanguage], () =>
-    api.getMovieProviders(activeLanguage)
-  );
+  const { data: genres } = useGetGenresQuery(activeLanguage);
+  const { data: providers } = useGetMovieProvidersQuery(activeLanguage);
 
   useEffect(() => {
     setDefaultLocale(activeLanguage!);
@@ -50,7 +42,7 @@ export const Filters: React.FC<FiltersProps> = ({
           <p>{t("Genre")}</p>
           <Form.Select size="sm" value={genreId} onChange={changeGenreId}>
             <option value="">{t("All")}</option>
-            {genres.map(({ id, name }: GenreType) => (
+            {genres.map(({ id, name }: Genre) => (
               <option key={id} value={id}>
                 {name}
               </option>
@@ -63,7 +55,7 @@ export const Filters: React.FC<FiltersProps> = ({
           <p>{t("Provider")}</p>
           <Form.Select size="sm" value={providerId} onChange={changeProviderId}>
             <option value="">{t("All")}</option>
-            {providers.map(({ provider_id, provider_name }: ProviderType) => (
+            {providers.map(({ provider_id, provider_name }: Provider) => (
               <option key={provider_id} value={provider_id}>
                 {provider_name}
               </option>

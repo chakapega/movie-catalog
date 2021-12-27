@@ -3,8 +3,7 @@ import { Container } from "react-bootstrap";
 
 import { Filters } from "features/Filters/Filters.component";
 import { getRandomMovieId } from "utils";
-import { useQuery } from "react-query";
-import { getMoviesByFilters } from "features/Filters/Filters.api";
+import { useGetMoviesByFiltersQuery } from "features/Filters/Filters.api";
 import { useAppSelector } from "store/hooks";
 import { MovieDetails } from "features/MovieDetails/MovieDetails.component";
 import { useFilters } from "features/Filters/Filters.hooks";
@@ -24,18 +23,10 @@ export const RandomMovie = () => {
     selectedFilters,
     changeSelectedFilters,
   } = useFilters();
-  const { data: searchedMoviesData, refetch } = useQuery(
-    ["getMoviesByFilters", activeLanguage],
-    () => getMoviesByFilters(activeLanguage, selectedFilters),
-    {
-      refetchOnWindowFocus: false,
-      enabled: false,
-    }
+  const { data: searchedMoviesData } = useGetMoviesByFiltersQuery(
+    { activeLanguage, selectedFilters },
+    { skip: !selectedFilters }
   );
-
-  useEffect(() => {
-    if (selectedFilters) refetch();
-  }, [refetch, selectedFilters, activeLanguage]);
 
   useEffect(() => {
     if (searchedMoviesData?.results) setRandomMovieId(getRandomMovieId(searchedMoviesData.results));

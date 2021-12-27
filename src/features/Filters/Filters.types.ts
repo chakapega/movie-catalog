@@ -1,3 +1,5 @@
+import { ActiveLanguage } from "store/language/types";
+
 export type FiltersProps = {
   submit: () => void;
   genreId?: string;
@@ -10,19 +12,35 @@ export type FiltersProps = {
   changeEndDate: Function;
 };
 
-export type SelectedFiltersType = {
+export type SelectedFilters = {
   genreId?: string;
   providerId?: string;
   startDate?: string;
   endDate?: string;
 } | null;
 
-export type GenreType = {
+export type Genre = {
   id: number;
   name: string;
 };
 
-export type ProviderType = {
-  provider_id: number;
+export type Provider = {
+  display_priority: number;
+  logo_path: string;
   provider_name: string;
+  provider_id: number;
+};
+
+export type GetMovieProvidersResponse = {
+  results: Provider[];
+};
+
+export type GetGenresResponse = {
+  genres: Genre[];
+};
+
+export type GetMoviesByFiltersArgs = {
+  activeLanguage: ActiveLanguage;
+  selectedFilters: SelectedFilters;
+  page?: number;
 };

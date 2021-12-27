@@ -1,52 +1,54 @@
 import qs from "qs";
+import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 import { THE_MOVIE_DB_BASE_URL } from "constants/api";
 import { ActiveLanguage } from "store/language/types";
 import { getCountryCode } from "utils";
-import { SelectedFiltersType } from "features/Filters/Filters.types";
+import { GetGenresResponse, GetMovieProvidersResponse, GetMoviesByFiltersArgs } from "features/Filters/Filters.types";
 
 const { REACT_APP_THE_MOVIE_DB_KEY } = process.env;
 
-export const getMovieProviders = async (activeLanguage: ActiveLanguage) => {
-  const countryCode = getCountryCode(activeLanguage);
-  const query = qs.stringify({ api_key: REACT_APP_THE_MOVIE_DB_KEY, language: countryCode });
+export const filtersApi = createApi({
+  reducerPath: "filtersApi",
+  baseQuery: fetchBaseQuery({ baseUrl: THE_MOVIE_DB_BASE_URL }),
+  endpoints: (builder) => ({
+    getGenres: builder.query({
+      query: (activeLanguage: ActiveLanguage) => {
+        const countryCode = getCountryCode(activeLanguage);
+        const query = qs.stringify({ api_key: REACT_APP_THE_MOVIE_DB_KEY, language: countryCode });
 
-  const response = await fetch(`${THE_MOVIE_DB_BASE_URL}/watch/providers/movie?${query}`);
-  const { results } = await response.json();
+        return `genre/movie/list?${query}`;
+      },
+      transformResponse: (response: GetGenresResponse) => response.genres,
+    }),
+    getMovieProviders: builder.query({
+      query: (activeLanguage: ActiveLanguage) => {
+        const countryCode = getCountryCode(activeLanguage);
+        const query = qs.stringify({ api_key: REACT_APP_THE_MOVIE_DB_KEY, language: countryCode });
 
-  return results;
-};
+        return `watch/providers/movie?${query}`;
+      },
+      transformResponse: (response: GetMovieProvidersResponse) => response.results,
+    }),
+    getMoviesByFilters: builder.query({
+      query: ({ activeLanguage, selectedFilters, page }: GetMoviesByFiltersArgs) => {
+        const countryCode = getCountryCode(activeLanguage);
+        const { genreId, providerId, startDate, endDate } = selectedFilters!;
+        const query = qs.stringify({
+          with_genres: genreId,
+          with_watch_providers: providerId,
+          api_key: REACT_APP_THE_MOVIE_DB_KEY,
+          language: countryCode,
+          include_adult: false,
+          page,
+          "primary_release_date.gte": startDate,
+          "primary_release_date.lte": endDate,
+        });
 
-export const getGenres = async (activeLanguage: ActiveLanguage) => {
-  const countryCode = getCountryCode(activeLanguage);
-  const query = qs.stringify({ api_key: REACT_APP_THE_MOVIE_DB_KEY, language: countryCode });
+        return `discover/movie?${query}`;
+      },
+    }),
+  }),
+});
 
-  const response = await fetch(`${THE_MOVIE_DB_BASE_URL}/genre/movie/list?${query}`);
-  const { genres } = await response.json();
-
-  return genres;
-};
-
-export const getMoviesByFilters = async (
-  activeLanguage: ActiveLanguage,
-  selectedFilters: SelectedFiltersType,
-  page?: number
-) => {
-  const countryCode = getCountryCode(activeLanguage);
-  const { genreId, providerId, startDate, endDate } = selectedFilters!;
-  const query = qs.stringify({
-    with_genres: genreId,
-    with_watch_providers: providerId,
-    api_key: REACT_APP_THE_MOVIE_DB_KEY,
-    language: countryCode,
-    include_adult: false,
-    page,
-    "primary_release_date.gte": startDate,
-    "primary_release_date.lte": endDate,
-  });
-
-  const response = await fetch(`${THE_MOVIE_DB_BASE_URL}/discover/movie?${query}`);
-  const data = await response.json();
-
-  return data;
-};
+export const { useGetMovieProvidersQuery, useGetGenresQuery, useGetMoviesByFiltersQuery } = filtersApi;

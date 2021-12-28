@@ -1,20 +1,26 @@
 import qs from "qs";
+import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 import { THE_MOVIE_DB_BASE_URL } from "constants/api";
-import { ActiveLanguage } from "store/language/types";
 import { getCountryCode } from "utils";
 import { movieInfoType } from "./MovieDetails.constants";
+import { GetMovieInfoArgs } from "./MovieDetails.types";
 
 const { REACT_APP_THE_MOVIE_DB_KEY } = process.env;
 
-export const getMovieInfo = async (infoType: string, movieId: string, activeLanguage: ActiveLanguage) => {
-  const countryCode = getCountryCode(activeLanguage);
-  const query = qs.stringify({ api_key: REACT_APP_THE_MOVIE_DB_KEY, language: countryCode });
+export const movieDetailsApi = createApi({
+  reducerPath: "movieDetailsApi",
+  baseQuery: fetchBaseQuery({ baseUrl: THE_MOVIE_DB_BASE_URL }),
+  endpoints: (builder) => ({
+    getMovieInfo: builder.query({
+      query: ({ activeLanguage, movieId, infoType }: GetMovieInfoArgs) => {
+        const countryCode = getCountryCode(activeLanguage);
+        const query = qs.stringify({ api_key: REACT_APP_THE_MOVIE_DB_KEY, language: countryCode });
 
-  const response = await fetch(
-    `${THE_MOVIE_DB_BASE_URL}/movie/${movieId}${infoType === movieInfoType.details ? "" : "/" + infoType}?${query}`
-  );
-  const data = await response.json();
+        return `movie/${movieId}${infoType === movieInfoType.details ? "" : "/" + infoType}?${query}`;
+      },
+    }),
+  }),
+});
 
-  return data;
-};
+export const { useGetMovieInfoQuery } = movieDetailsApi;

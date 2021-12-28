@@ -9,6 +9,7 @@ import { accountApi } from "features/Account/Account.api";
 import { authApi } from "features/Auth/Auth.api";
 import { dashboardApi } from "features/Dashboard/Dashboard.api";
 import { filtersApi } from "features/Filters/Filters.api";
+import { movieDetailsApi } from "features/MovieDetails/MovieDetails.api";
 
 export const store = configureStore({
   reducer: {
@@ -21,12 +22,14 @@ export const store = configureStore({
     [authApi.reducerPath]: authApi.reducer,
     [dashboardApi.reducerPath]: dashboardApi.reducer,
     [filtersApi.reducerPath]: filtersApi.reducer,
+    [movieDetailsApi.reducerPath]: movieDetailsApi.reducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(
       accountApi.middleware,
       authApi.middleware,
       dashboardApi.middleware,
-      filtersApi.middleware
+      filtersApi.middleware,
+      movieDetailsApi.middleware
     ),
 });

@@ -2,10 +2,9 @@ import React, { useState } from "react";
 import { useParams } from "react-router-dom";
 import { Container, Row, Col, Button } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
-import { useQuery } from "react-query";
 
 import { useAppSelector } from "store/hooks";
-import { getMovieInfo } from "./MovieDetails.api";
+import { useGetMovieInfoQuery } from "./MovieDetails.api";
 import { getImageUrl, limiteNumberOfActors, limiteNumberOfMovies } from "utils";
 import { CastList } from "./CastList";
 import { RecommendedMoviesList } from "./RecommendedMoviesList";
@@ -19,18 +18,21 @@ export const MovieDetails: React.FC<{ movieId?: string }> = ({ movieId }) => {
   const { activeLanguage } = useAppSelector((state) => state.language);
   const { session_id } = useAppSelector((state) => state.auth);
   const [showAddMovieToList, setShowAddMovieToList] = useState(false);
-  const { isSuccess: areMovieDetailsSuccess, data: movieDetails } = useQuery(
-    [movieInfoType.details, resultMovieId, activeLanguage],
-    () => getMovieInfo(movieInfoType.details, resultMovieId, activeLanguage)
-  );
-  const { isSuccess: areMovieCreditsSuccess, data: movieCredits } = useQuery(
-    [movieInfoType.credits, resultMovieId, activeLanguage],
-    () => getMovieInfo(movieInfoType.credits, resultMovieId, activeLanguage)
-  );
-  const { isSuccess: areRecommendedMoviesSuccess, data: recommendedMovies } = useQuery(
-    [movieInfoType.recommendations, resultMovieId, activeLanguage],
-    () => getMovieInfo(movieInfoType.recommendations, resultMovieId, activeLanguage)
-  );
+  const { isSuccess: areMovieDetailsSuccess, data: movieDetails } = useGetMovieInfoQuery({
+    activeLanguage,
+    movieId: resultMovieId,
+    infoType: movieInfoType.details,
+  });
+  const { data: movieCredits } = useGetMovieInfoQuery({
+    activeLanguage,
+    movieId: resultMovieId,
+    infoType: movieInfoType.credits,
+  });
+  const { data: recommendedMovies } = useGetMovieInfoQuery({
+    activeLanguage,
+    movieId: resultMovieId,
+    infoType: movieInfoType.recommendations,
+  });
 
   return (
     <>
@@ -52,13 +54,13 @@ export const MovieDetails: React.FC<{ movieId?: string }> = ({ movieId }) => {
                 <p>{`${t("Release date")}: ${movieDetails.release_date}`}</p>
                 <p>{`${t("Rating")}: ${movieDetails.vote_average}`}</p>
                 {movieDetails.tagline && <p>{`${t("Tagline")}: ${movieDetails.tagline}`}</p>}
-                {areMovieCreditsSuccess && (
+                {movieCredits?.cast?.length && (
                   <>
                     <p>{`${t("Starring")}:`}</p>
                     <CastList cast={limiteNumberOfActors(movieCredits.cast)} />
                   </>
                 )}
-                {areRecommendedMoviesSuccess && (
+                {recommendedMovies?.results?.length && (
                   <>
                     <p>{`${t("Recommended movies")}:`}</p>
                     <RecommendedMoviesList recommendedMovies={limiteNumberOfMovies(recommendedMovies.results)} />

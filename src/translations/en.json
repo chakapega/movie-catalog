@@ -9,6 +9,7 @@
   "Rating": "Rating",
   "Tagline": "Tagline",
   "Starring": "Starring",
+  "Recommended movies": "Recommended movies",
   "Genre": "Genre",
   "Apply": "Apply",
   "paginationIndicator": "Page {{page}} of {{totalPages}}",

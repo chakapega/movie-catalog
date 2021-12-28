@@ -1,10 +1,10 @@
-type ActorType = {
+type Actor = {
   id: number;
   name: string;
 };
 
-export type ActorsType = Array<ActorType>;
+export type Actors = Actor[];
 
 export type CastListProps = {
-  cast: ActorsType;
+  cast: Actors;
 };

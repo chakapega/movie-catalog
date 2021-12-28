@@ -9,7 +9,7 @@ import * as api from "features/MovieLists/MovieLists.api";
 import { showSpinner, hideSpinner } from "store/spinner";
 import { showNotice } from "store/notice";
 import { useCreatedLists } from "features/MovieLists/MovieLists.hooks";
-import { ListType } from "features/MovieLists/ListsList/types";
+import { List } from "features/MovieLists/ListsList/types";
 
 export const AddMovieToList: React.FC<{ setShowAddMovieToList: Function }> = ({ setShowAddMovieToList }) => {
   const { t } = useTranslation();
@@ -43,7 +43,7 @@ export const AddMovieToList: React.FC<{ setShowAddMovieToList: Function }> = ({ 
         <span>{t("List name")}</span>
         {createdLists && (
           <Form.Select className="mt-1" size="sm" value={selectedListId} onChange={changeSelectedListId}>
-            {createdLists.map(({ id, name }: ListType) => (
+            {createdLists.map(({ id, name }: List) => (
               <option key={id} value={id}>
                 {name}
               </option>

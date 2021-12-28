@@ -1,10 +1,10 @@
-export type ListType = {
+export type List = {
   id: number;
   name: string;
   description: string;
 };
 
 export type ListsListProps = {
-  lists: Array<ListType>;
+  lists: List[];
   refetch: Function;
 };

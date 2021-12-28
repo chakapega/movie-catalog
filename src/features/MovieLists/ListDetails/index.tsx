@@ -1,14 +1,13 @@
 import React from "react";
 import { useParams } from "react-router-dom";
 import { Container } from "react-bootstrap";
-import { useQuery } from "react-query";
 
-import * as api from "features/MovieLists/MovieLists.api";
+import { useGetListDetailsQuery } from "features/MovieLists/MovieLists.api";
 import { MoviesList } from "features/MoviesList/MoviesList.component";
 
 export const ListDetails = () => {
   const { id } = useParams<{ id: string }>();
-  const { data: listDetails, refetch } = useQuery(["getListDetails", id], () => api.getListDetails(id));
+  const { data: listDetails, refetch } = useGetListDetailsQuery(id);
 
   return (
     <Container>

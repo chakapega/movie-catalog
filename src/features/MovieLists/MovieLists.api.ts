@@ -1,4 +1,5 @@
 import qs from "qs";
+import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 import { THE_MOVIE_DB_BASE_URL } from "constants/api";
 import { SessionIdType } from "store/auth/types";
@@ -31,15 +32,6 @@ export const deleteList = async (session_id: string, list_id: number) => {
   return result;
 };
 
-export const getListDetails = async (list_id: string) => {
-  const query = qs.stringify({ api_key: REACT_APP_THE_MOVIE_DB_KEY });
-
-  const response = await fetch(`${THE_MOVIE_DB_BASE_URL}/list/${list_id}?${query}`);
-  const listDetails = await response.json();
-
-  return listDetails;
-};
-
 export const addMovieToList = async (list_id: string, session_id: string, movieId: string) => {
   const query = qs.stringify({ api_key: REACT_APP_THE_MOVIE_DB_KEY, session_id });
 
@@ -69,3 +61,19 @@ export const deleteMovieFromList = async (list_id: string, session_id: SessionId
 
   return result;
 };
+
+export const movieListsApi = createApi({
+  reducerPath: "movieListsApi",
+  baseQuery: fetchBaseQuery({ baseUrl: THE_MOVIE_DB_BASE_URL }),
+  endpoints: (builder) => ({
+    getListDetails: builder.query({
+      query: (list_id: string) => {
+        const query = qs.stringify({ api_key: REACT_APP_THE_MOVIE_DB_KEY });
+
+        return `list/${list_id}?${query}`;
+      },
+    }),
+  }),
+});
+
+export const { useGetListDetailsQuery } = movieListsApi;

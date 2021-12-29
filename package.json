@@ -44,9 +44,14 @@
     ]
   },
   "devDependencies": {
+    "@testing-library/jest-dom": "^5.14.1",
+    "@testing-library/react": "^11.2.7",
+    "@testing-library/user-event": "^12.8.3",
     "@types/bootstrap": "^5.1.6",
     "@types/i18next": "^13.0.0",
+    "@types/jest": "^26.0.23",
     "@types/moment": "^2.13.0",
+    "@types/node": "^12.20.15",
     "@types/qs": "^6.9.7",
     "@types/react": "^17.0.24",
     "@types/react-bootstrap": "^0.32.26",

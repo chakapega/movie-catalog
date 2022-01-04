@@ -51,3 +51,39 @@ export const movies = [
     vote_count: 530,
   },
 ];
+
+export const genres = [
+  {
+    id: 28,
+    name: "Action",
+  },
+  {
+    id: 12,
+    name: "Adventure",
+  },
+  {
+    id: 16,
+    name: "Animation",
+  },
+];
+
+export const providers = [
+  {
+    display_priority: 0,
+    logo_path: "/9A1JSVmSxsyaBK4SUFsYVqbAYfW.jpg",
+    provider_name: "Netflix",
+    provider_id: 8,
+  },
+  {
+    display_priority: 0,
+    logo_path: "/eApzJtzOngfBlEC3lCjuAtzsOTf.jpg",
+    provider_name: "Hotstar",
+    provider_id: 122,
+  },
+  {
+    display_priority: 0,
+    logo_path: "/43Ykyf69e9Ca3jmTtefhINkw6PN.jpg",
+    provider_name: "Fetch TV",
+    provider_id: 436,
+  },
+];

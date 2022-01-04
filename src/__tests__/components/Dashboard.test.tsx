@@ -3,14 +3,6 @@ import React from "react";
 import { render, screen } from "utils/test-utils";
 import { Dashboard } from "features/Dashboard/Dashboard.component";
 
-jest.mock("react-i18next", () => ({
-  useTranslation: () => {
-    return {
-      t: (str: string): string => str,
-    };
-  },
-}));
-
 describe("Dashboard component", () => {
   test("should render headings", () => {
     render(<Dashboard />);

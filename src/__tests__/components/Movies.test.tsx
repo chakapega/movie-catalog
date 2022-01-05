@@ -1,4 +1,5 @@
 import React from "react";
+import userEvent from "@testing-library/user-event";
 
 import { render, screen, fireEvent } from "utils/test-utils";
 import { Movies } from "features/Movies/Movies.component";
@@ -41,7 +42,7 @@ describe("Movies component", () => {
     const genresSelect = await screen.findByTestId("genres-select");
 
     expect(genresSelect).toHaveValue("");
-    fireEvent.change(genresSelect, { target: { value: "28" } });
+    userEvent.selectOptions(genresSelect, "Action");
     expect(genresSelect).toHaveValue("28");
   });
 
@@ -51,7 +52,7 @@ describe("Movies component", () => {
     const providersSelect = await screen.findByTestId("providers-select");
 
     expect(providersSelect).toHaveValue("");
-    fireEvent.change(providersSelect, { target: { value: "8" } });
+    userEvent.selectOptions(providersSelect, "Netflix");
     expect(providersSelect).toHaveValue("8");
   });
 
@@ -80,7 +81,7 @@ describe("Movies component", () => {
     const datepickerStartDate = screen.getByPlaceholderText("Start release date");
 
     fireEvent.change(datepickerStartDate, { target: { value: "01/11/2021" } });
-    fireEvent.click(container.querySelector(".react-datepicker__close-icon")!);
+    userEvent.click(container.querySelector(".react-datepicker__close-icon")!);
     expect(datepickerStartDate).toHaveValue("");
   });
 
@@ -89,7 +90,27 @@ describe("Movies component", () => {
     const datepickerEndDate = screen.getByPlaceholderText("End release date");
 
     fireEvent.change(datepickerEndDate, { target: { value: "01/05/2022" } });
-    fireEvent.click(container.querySelector(".react-datepicker__close-icon")!);
+    userEvent.click(container.querySelector(".react-datepicker__close-icon")!);
     expect(datepickerEndDate).toHaveValue("");
+  });
+
+  test("should render movie list after click apply button", async () => {
+    render(<Movies />);
+
+    const genresSelect = await screen.findByTestId("genres-select");
+    const providersSelect = await screen.findByTestId("providers-select");
+    const datepickerStartDate = screen.getByPlaceholderText("Start release date");
+    const datepickerEndDate = screen.getByPlaceholderText("End release date");
+    const buttonApply = screen.getByRole("button", { name: "Apply" });
+
+    userEvent.selectOptions(genresSelect, "Action");
+    userEvent.selectOptions(providersSelect, "Netflix");
+    fireEvent.change(datepickerStartDate, { target: { value: "01/11/2021" } });
+    fireEvent.change(datepickerEndDate, { target: { value: "01/05/2022" } });
+    userEvent.click(buttonApply);
+
+    await screen.findByTitle("Spider-Man: No Way Home");
+    await screen.findByTitle("The Matrix Resurrections");
+    await screen.findByTitle("Resident Evil: Welcome to Raccoon City");
   });
 });

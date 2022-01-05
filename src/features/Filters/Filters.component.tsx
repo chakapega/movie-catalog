@@ -40,7 +40,7 @@ export const Filters: React.FC<FiltersProps> = ({
       {genres?.length && (
         <Col xs="auto">
           <p>{t("Genre")}</p>
-          <Form.Select size="sm" value={genreId} onChange={changeGenreId}>
+          <Form.Select size="sm" value={genreId} onChange={changeGenreId} data-testid="genres-select">
             <option value="">{t("All")}</option>
             {genres.map(({ id, name }: Genre) => (
               <option key={id} value={id}>
@@ -53,7 +53,7 @@ export const Filters: React.FC<FiltersProps> = ({
       {providers?.length && (
         <Col xs="auto">
           <p>{t("Provider")}</p>
-          <Form.Select size="sm" value={providerId} onChange={changeProviderId}>
+          <Form.Select size="sm" value={providerId} onChange={changeProviderId} data-testid="providers-select">
             <option value="">{t("All")}</option>
             {providers.map(({ provider_id, provider_name }: Provider) => (
               <option key={provider_id} value={provider_id}>

@@ -113,4 +113,22 @@ describe("Movies component", () => {
     await screen.findByTitle("The Matrix Resurrections");
     await screen.findByTitle("Resident Evil: Welcome to Raccoon City");
   });
+
+  test("should render pagination", async () => {
+    render(<Movies />);
+
+    const genresSelect = await screen.findByTestId("genres-select");
+    const providersSelect = await screen.findByTestId("providers-select");
+    const datepickerStartDate = screen.getByPlaceholderText("Start release date");
+    const datepickerEndDate = screen.getByPlaceholderText("End release date");
+    const buttonApply = screen.getByRole("button", { name: "Apply" });
+
+    userEvent.selectOptions(genresSelect, "Action");
+    userEvent.selectOptions(providersSelect, "Netflix");
+    fireEvent.change(datepickerStartDate, { target: { value: "01/11/2021" } });
+    fireEvent.change(datepickerEndDate, { target: { value: "01/05/2022" } });
+    userEvent.click(buttonApply);
+
+    await screen.findByText("Page 1 of 1");
+  });
 });

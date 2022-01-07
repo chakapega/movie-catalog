@@ -7,7 +7,7 @@ import { render as rtlRender } from "@testing-library/react";
 import { store as configuredStore } from "store";
 
 const render = (ui: React.ReactElement, { store = configuredStore, ...renderOptions } = {}) => {
-  const Wrapper: React.ComponentType<{}> = ({ children }) => {
+  const Wrapper: React.ComponentType = ({ children }) => {
     const history = createMemoryHistory();
 
     return (

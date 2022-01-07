@@ -18,7 +18,7 @@ export const LanguageSwitcher = () => {
 
   return (
     <Col xs="auto">
-      <Form.Select size="sm" value={activeLanguage} onChange={handleChange} data-testid="language-switcher-select">
+      <Form.Select size="sm" value={activeLanguage} onChange={handleChange} data-testid="language-select">
         {LANGUAGES.map((language) => (
           <option key={language} value={language}>
             {language}

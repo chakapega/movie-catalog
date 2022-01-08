@@ -90,27 +90,25 @@ export const providers = [
 
 export const movieDetails = {
   overview:
-    "Peter Parker is an outcast high schooler abandoned by his parents as a boy, leaving him to be raised by his Uncle Ben and Aunt May. Like most teenagers, Peter is trying to figure out who he is and how he got to be the person he is today. As Peter discovers a mysterious briefcase that belonged to his father, he begins a quest to understand his parents' disappearance – leading him directly to Oscorp and the lab of Dr. Curt Connors, his father's former partner. As Spider-Man is set on a collision course with Connors' alter ego, The Lizard, Peter will make life-altering choices to use his powers and shape his destiny to become a hero.",
-  poster_path: "/fSbqPbqXa7ePo8bcnZYN9AHv6zA.jpg",
-  release_date: "2012-06-23",
-  tagline: "The untold story begins.",
-  title: "The Amazing Spider-Man",
-  vote_average: 6.6,
+    "Peter Parker is unmasked and no longer able to separate his normal life from the high-stakes of being a super-hero. When he asks for help from Doctor Strange the stakes become even more dangerous, forcing him to discover what it truly means to be Spider-Man.",
+  poster_path: "/1g0dhYtq4irTY1GPXvft6k4YLjm.jpg",
+  release_date: "2021-12-15",
+  tagline: "The Multiverse unleashed.",
+  title: "Spider-Man: No Way Home",
+  vote_average: 8.4,
 };
 
 export const cast = [
   {
-    id: 37625,
-    name: "Andrew Garfield",
+    id: 1136406,
+    name: "Tom Holland",
   },
   {
-    id: 54693,
-    name: "Emma Stone",
+    id: 505710,
+    name: "Zendaya",
   },
   {
-    id: 7026,
-    name: "Rhys Ifans",
+    id: 71580,
+    name: "Benedict Cumberbatch",
   },
 ];
-
-

@@ -109,8 +109,8 @@ describe("RandomMovie component", () => {
     fireEvent.change(datepickerEndDate, { target: { value: "01/05/2022" } });
     userEvent.click(buttonApply);
 
-    await screen.findByRole("heading", { level: 3, name: "The Amazing Spider-Man" });
-    await screen.findByText("Andrew Garfield");
-    await screen.findByText("Spider-Man: No Way Home");
+    await screen.findByRole("heading", { level: 3, name: "Spider-Man: No Way Home" });
+    await screen.findByText("Tom Holland");
+    await screen.findByText(/The Multiverse unleashed./i);
   });
 });

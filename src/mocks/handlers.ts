@@ -3,11 +3,18 @@ import { rest } from "msw";
 import { movies, genres, providers, movieDetails, cast } from "./data";
 
 import { THE_MOVIE_DB_BASE_URL } from "constants/api";
+import { INDEX_OF_FIRST_ELEMENT, INDEX_OF_SECOND_ELEMENT, INDEX_OF_THIRD_ELEMENT } from "constants/common";
 
 export const handlers = [
-  rest.get(`${THE_MOVIE_DB_BASE_URL}/movie/now_playing`, (_, res, ctx) => res(ctx.json({ results: movies }))),
-  rest.get(`${THE_MOVIE_DB_BASE_URL}/movie/upcoming`, (_, res, ctx) => res(ctx.json({ results: movies }))),
-  rest.get(`${THE_MOVIE_DB_BASE_URL}/movie/popular`, (_, res, ctx) => res(ctx.json({ results: movies }))),
+  rest.get(`${THE_MOVIE_DB_BASE_URL}/movie/now_playing`, (_, res, ctx) =>
+    res(ctx.json({ results: [movies[INDEX_OF_FIRST_ELEMENT]] }))
+  ),
+  rest.get(`${THE_MOVIE_DB_BASE_URL}/movie/upcoming`, (_, res, ctx) =>
+    res(ctx.json({ results: [movies[INDEX_OF_SECOND_ELEMENT]] }))
+  ),
+  rest.get(`${THE_MOVIE_DB_BASE_URL}/movie/popular`, (_, res, ctx) =>
+    res(ctx.json({ results: [movies[INDEX_OF_THIRD_ELEMENT]] }))
+  ),
   rest.get(`${THE_MOVIE_DB_BASE_URL}/genre/movie/list`, (_, res, ctx) => res(ctx.json({ genres: genres }))),
   rest.get(`${THE_MOVIE_DB_BASE_URL}/watch/providers/movie`, (_, res, ctx) => res(ctx.json({ results: providers }))),
   rest.get(`${THE_MOVIE_DB_BASE_URL}/discover/movie`, (_, res, ctx) =>

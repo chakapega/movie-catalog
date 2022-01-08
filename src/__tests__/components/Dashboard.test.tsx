@@ -15,8 +15,8 @@ describe("Dashboard component", () => {
   test("should render movies cards with links", async () => {
     render(<Dashboard />);
 
-    await screen.findAllByRole("link", { name: "Spider-Man: No Way Home" });
-    await screen.findAllByRole("link", { name: "The Matrix Resurrections" });
-    await screen.findAllByRole("link", { name: "Resident Evil: Welcome to Raccoon City" });
+    await screen.findByRole("link", { name: "Spider-Man: No Way Home" });
+    await screen.findByRole("link", { name: "The Matrix Resurrections" });
+    await screen.findByRole("link", { name: "Resident Evil: Welcome to Raccoon City" });
   });
 });
